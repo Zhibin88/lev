@@ -34,7 +34,8 @@
             [lev.llm :as llm]
             [lev.mlx :as mlx]
             [lev.sequence :as seq]
-            [lev.think :as think]))
+            [lev.think :as think]
+            [lev.tinydecide :as td]))
 
 (def bundle-repo "convaiinnovations/laya")
 
@@ -203,12 +204,16 @@
 (defn available?
   "Is this checkpoint's data directory prepared (or, for a thinker, its
   GGUF on disk and the llm native built — a router given its own
-  :thinker-loader vouches for the native itself)?"
+  :thinker-loader vouches for the native itself; for a TinyDecide one,
+  its release directory, which needs no native beyond the kernels)?"
   [router name]
   (let [key (normalise-name router name)]
     (if (thinker? router key)
-      (boolean (and (or (:custom-thinker-loader router) (llm/available?))
-                    (.exists (clojure.java.io/file (:model (get (:thinkers router) key))))))
+      (let [{:keys [engine model]} (get (:thinkers router) key)]
+        (if (= "tinydecide" (some-> engine clojure.core/name))
+          (td/release? model)
+          (boolean (and (or (:custom-thinker-loader router) (llm/available?))
+                        (.exists (clojure.java.io/file model))))))
       (let [dir (get (:models router) key)]
         (boolean (and dir (.exists (clojure.java.io/file dir "manifest.edn"))))))))
 

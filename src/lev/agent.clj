@@ -234,7 +234,7 @@
 
 (defmulti system-one*
   "The engine behind system-one, by the agent's :kind: :encoder (here),
-  :thinker (lev.think) or :clef (lev.clef)."
+  :thinker (lev.think), :clef (lev.clef) or :tinydecide (lev.tinydecide)."
   (fn [agent _state _questions _opts] (:kind agent :encoder)))
 
 (defn system-one
@@ -272,11 +272,11 @@
 
 (defn- calibration-path
   "Where an agent keeps its temperatures: an encoder's are its
-  checkpoint config's; a thinker's (and a Clef model's, lev.clef) sit
+  checkpoint config's; a thinker's (and a Clef or TinyDecide model's) sit
   under its config's :calibration, since its :temperature is the
   sampling one."
   [agent]
-  (if (#{:thinker :clef} (:kind agent)) [:cfg :calibration] [:cfg]))
+  (if (#{:thinker :clef :tinydecide} (:kind agent)) [:cfg :calibration] [:cfg]))
 
 (defn calibration-of
   "The agent's {:temperature [per type] :temperature-by-options {bucket T}}."

@@ -1,0 +1,288 @@
+[{:text "" :ids []}
+ {:text " " :ids []}
+ {:text "Hello, World!" :ids [6536 16 1094 5]}
+ {:text "  leading and trailing  " :ids [1882 1004 3444 1081]}
+ {:text "tab\there\nnewline\r\nCRLF" :ids [14059 1187 1053 3177 11490 9042]}
+ {:text "Caf\u00e9 cr\u00e8me br\u00fbl\u00e9e, na\u00efve r\u00e9sum\u00e9, jalape\u00f1o, \u00c5ngstr\u00f6m" :ids [6612 11490 14016 6923 8172 1069 16 5560 2515 11531 16 12086 1726 10318 1086 16 12957 2371 14071]}
+ {:text "e\u0301 a\u0300 o\u0308 combining marks" :ids [47 43 57 10112 5004]}
+ {:text "10\u00a0km by the\u2009thin\u202fspace\u3000ideographic" :ids [1189 1468 1017 1002 3854 1691 7795 7672 12043]}
+ {:text "line\u2028separator\u2029paragraph" :ids [1245 13700 14704 1958 13824]}
+ {:text "don\u2019t \u201cquote\u201d \u2018single\u2019 \u00abguillemets\u00bb \u2014 en\u2013dash \u2026 ellipsis" :ids [1129 527 62 529 11996 530 526 1314 527 83 14770 5198 9954 1021 96 523 3370 522 10020 535 2452 12154 5172]}
+ {:text "zero\u200bwidth\ufeffbom\u00adsoft\u200dzwj" :ids [4707 8023 10390 1237 4087 4237 12466 1485 1865 2504]}
+ {:text "bell\u0007 escape\u001b null\u0000 del\u007f c1\u0085" :ids [3328 3017 12696 2367 2972 45 1492]}
+ {:text "replacement \ufffd char" :ids [5094 14703]}
+ {:text "\u6211\u7231\u5317\u4eac Tokyo \u6771\u4eac\u30bf\u30ef\u30fc \u3072\u3089\u304c\u306a \ud55c\uad6d\uc5b4" :ids [861 1 787 761 4513 885 761 715 15728 15731 679 15677 15643 15659 475 15472 15487 15457 15480 15486 15465 15474]}
+ {:text "pizza \ud83c\udf55 tonight \ud83c\udf89\ud83c\udf89 \ud83d\udc4d\ud83c\udffd family \ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67" :ids [9435 1 2892 1 1 1160 1]}
+ {:text "\u0130stanbul \u015eEH\u0130R \u0131 i\u0307 I" :ids [8770 6320 10417 110 51 51]}
+ {:text "\u03a3\u038a\u03a3\u03a5\u03a6\u039f\u03a3 \u03b5\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac \u03a9\u03bc\u03ad\u03b3\u03b1" :ids [179 13288 15199 15201 15202 15196 15199 165 15193 15193 14568 12624 13288 15192 11957 185 15194 15189 15187 11957]}
+ {:text "Stra\u00dfe STRASSE \u00df \u1e9e" :ids [1363 1532 13579 1069 1363 7110 2370 102 102]}
+ {:text "\ufb01le \ufb02ow ligatures" :ids [990 1576 991 4000 6954 9853 1021]}
+ {:text "\uff21\uff22\uff23 fullwidth \uff11\uff12\uff13 \uff01\uff1f" :ids [1 1445 8023 10390 1237 1 992 1000]}
+ {:text "\u041f\u0440\u0438\u0432\u0435\u0442, \u043c\u0438\u0440! \u0401\u043b\u043a\u0430 \u0419\u043e\u0434 \u0407\u0436\u0430\u043a \u0491\u0430\u043d\u043e\u043a" :ids [200 12876 9091 14659 12259 14275 16 197 9091 12876 5 191 15058 14436 9034 194 11734 15208 219 15209 9034 14436 1]}
+ {:text "\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645" :ids [301 12980 15286 15282 14667 277 14667 14392 15296 14667 14392 14159]}
+ {:text "\u05e9\u05dc\u05d5\u05dd \u05e2\u05d5\u05dc\u05dd" :ids [272 15265 15258 15266 265 15258 15265 15266]}
+ {:text "\u0928\u092e\u0938\u094d\u0924\u0947 \u0926\u0941\u0928\u093f\u092f\u093e" :ids [333 15333 15340 15325 331 15329 15343 15334 15342]}
+ {:text "\u0e2a\u0e27\u0e31\u0e2a\u0e14\u0e35\u0e0a\u0e32\u0e27\u0e42\u0e25\u0e01" :ids [1]}
+ {:text "\u0395\u03bb\u03bb\u03ac\u03b4\u03b1: \u0386 \u0388 \u0389 \u038a \u038c \u038e \u038f \u0390 \u03b0" :ids [165 15193 15193 11957 15188 11957 30 161 165 167 169 175 181 185 169 181]}
+ {:text "\u01c4 \u01c5 \u01c6 \u01c7 titlecase" :ids [1 1 1 1 1521 12415 1069]}
+ {:text "\u0141\u00d3D\u0179 Gda\u0144sk \u017b\u00f3\u0142\u0107" :ids [13177 49 6787 5685 68 1086 13455 1283]}
+ {:text "\u00d8resund \u00c6ble \u0152uvre \u00d0or\u0111e \u00de\u00f3r" :ids [106 5056 7532 103 2471 113 1231 10614 104 1958 15137 1069 107 1958]}
+ {:text "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" :ids [1]}
+ {:text "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" :ids [11324 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 9705 1056]}
+ {:text "abc\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9\u00e9" :ids [1]}
+ {:text "unbelievably-hyphenated_words/with\\slashes" :ids [3892 7570 1671 2570 5302 17 50 14226 9001 3381 41 1621 19 1013 38 13313 1234]}
+ {:text "3.14 $1,000.50 \u20ac20 \u00a35 \u00a5300 50% #tag @user" :ids [23 18 1408 8 21 16 1204 18 1758 580 9971 75 1634 77 11729 1697 1758 9 7 5393 36 4302]}
+ {:text "email a.b+c@ex-ample.co.uk url https://x.io/a?b=c&d=e#f" :ids [9131 43 18 44 15 45 36 3652 17 14402 1576 18 1527 18 1871 14521 1145 7220 1021 30 19 19 66 18 14259 19 43 35 44 33 45 10 46 33 47 7 48]}
+ {:text "Hey!!! What?!?! ..." :ids [3928 5 5 5 1060 35 5 35 5 18 18 18]}
+ {:text "\u00b4`^\u00a8~ spacing accents" :ids [90 42 40 80 72 10735 5113 8503 1021]}
+ {:text "math \ud835\udc00\ud835\udc01\ud835\udc02 \ud835\udc65\ud835\udc66 \u211d \u2115 \u2211 \u222b \u221a \u2264 \u2265 \u2260" :ids [7677 1 1 585 1 1 1 606 614 615 33]}
+ {:text "\u00a9 \u00ae \u2122 \u00a7 \u00b6 \u2020 \u2021 \u2022 \u00b0 \u00b1 \u00d7 \u00f7" :ids [81 85 586 79 92 532 533 534 86 87 101 105]}
+ {:text "private \ue000 use" :ids [1802 1 1229]}
+ {:text "\ua7af \u0250 \u0283 IPA \u014b" :ids [1 115 136 11105 1056 112]}
+ {:text "\u216b \u2163 roman numerals \u2460\u2461\u2462" :ids [1 1 2147 12696 4013 8602 1]}
+ {:text "\u01c5ungla \u01c8 \u01cb" :ids [1 1 1]}
+ {:text "tsch\u00fc\u00df M\u00dcNCHEN \u00d6l \u00c4pfel" :ids [14532 13887 13579 11745 10914 1373 13586 8537 6895 1145]}
+ {:text "\u00c0\u00c1\u00c2\u00c3\u00c4\u00c5\u00e0\u00e1\u00e2\u00e3\u00e4\u00e5 \u00c8\u00c9\u00ca\u00cb\u00e8\u00e9\u00ea\u00eb" :ids [11324 9705 9705 9705 9705 1056 14622 3400 3400 3400]}
+ {:text "\u010a \u010b \u0120 \u0121 \u0126 \u0127 \u0132 \u0133 \u013f \u0140 \u0149 \u014a \u014b \u017f" :ids [45 45 49 49 109 109 1 1 1 1 1 112 112 1]}
+ {:text "\u01cd \u01ce \u01cf \u01d0 \u01d1 \u01d2 \u01d3 \u01d4 \u01d5 \u01d6" :ids [43 43 51 51 57 57 63 63 63 63]}
+ {:text "\u1ea0 \u1ea1 \u1ea2 \u1ea3 \u1ea4 \u1ea5 Vi\u1ec7t Nam ti\u1ebfng Vi\u1ec7t" :ids [43 43 43 43 43 43 13677 12192 4486 2075 13677]}
+ {:text "j\ufb004E\uff2f\u4f2c\u05d5I\u2133\u0942 \u028a\u04b2\u24cb\u025e _ \u0964_X \ud83e\uddc4\u0e29\u2345\uac22 \ud835\udcaaI\u03f2\ud835\udc84\u2149" :ids [1 1 1 1 41 350 41 66 1 1]}
+ {:text "f l\ud83c\udf23@\uff4d\u04e3 \u0149x\ud83e\udd85\u24d7V\ud83e\uddf3\u0936\u4e60l\u0549) \u03b4d< \\" :ids [48 1 36 1 1 1 1 13 164 1100 32 38]}
+ {:text "\u22a9 { \u03e3\u0210_" :ids [1 69 1 41]}
+ {:text "\ufb02 \uff2c\u0280\u0275 j \u24f4% \u05d0\u4ff9/QI#`\u042d\u0e47\u21a6 \u4ef4\u202dr\uff12\u0976p \uacb2" :ids [991 1 52 1 9 247 1 19 13453 7 42 214 15582 1 1 1]}
+ {:text "V\u0438 \u030d,\u24b4{" :ids [64 9091 16 1 69]}
+ {:text "\u1fe9f\u067c\u2317&: \u02a3\uff34\uacf6\u23e3 \u4fae z\u00bd \u225c\u090a+\u21ea &\u017b\u05e5\u0271" :ids [1 10 30 1 1 68 11512 1 15 1 10 1]}
+ {:text "T \u04a7 \u0e19\u0441\ufb06I\u0366&\u017f\u0e56\u037b\ufb02\uac6ds\u06f3\u24bf\u043f\u0268ML *@ 8Y\u2297 " :ids [62 1 1 10 1 14 36 28 1106 15606]}
+ {:text "\u0e24\u4e2a " :ids [1 1]}
+ {:text "O1+{\u0330\u0396~\u0916\"\ufb02\"" :ids [57 1492 15 69 166 72 322 6 991 6]}
+ {:text "\u03fd\u4f6e>  >\u3084\u01cf \u047b \ufb01 \u04ecM* \u0152\ud83e\uddf1 " :ids [1 1 34 34 688 1078 1 990 214 1218 14 1]}
+ {:text "\u00a5\\\u0668\u213d)]\uff2f3:\u034d6\ud83e\udd4f<\u247d\u1f8e\u0307t8\u015em\uff5aD\u30a0\u1f49\ufb01" :ids [77 38 1 13 39 1 30 1 32 1 1 175 15976]}
+ {:text "\u2025 \u24d3C\uacaep\u03b9)\u02d1 K\ud83e\udde1E U\uff53\u096cG\u0223\ud83e\udd25\u2114" :ids [1 1 13 1 1 1]}
+ {:text "Y h\u03a5\u1e5a \u0e1c5\u01f9 \u0534\u091dX. \u0366\u2060" :ids [67 50 15201 1105 1 1 18]}
+ {:text "\u0476b \u0954" :ids [1]}
+ {:text "O\u21199\u01b3C(]\u026d\u092ee\u0544\uff5b\u0343\u0570d\ud83d\udd00Bw\"\ud835\udc1b\uac1f\u24dfg]n>C\u0916Z\u4e86\u0346" :ids [1 12 39 1 1 1 6 1 39 56 34 45 15318 1485 1]}
+ {:text "w\u05da\u01ee3\u22e2\u05e3w w\u1f42r\u2144|\u01e1\u4ee7\ud835\udc29vnti\u4e1c\u2006 " :ids [1 1 70 43 1 1 1]}
+ {:text "\u2124ODpM\ud835\udccc \u0566 ^\u2052tT:\u0e41\ufb01\u3026I\u00af A\". \u0345\u031f\u303biY!GE" :ids [1 1 40 1 30 1 43 6 18 1 5 12642]}
+ {:text "\u06ea\u0248\u1f9dW\uff3fk\u00b0\u0902\u30d5nZ\u202c\u0553 UG\u00b3s " :ids [1 1 1 63 1295 13260 1021]}
+ {:text "% J\u2135G " :ids [9 1]}
+ {:text "\u0340 \u24a2\u247e\u2008" :ids [1]}
+ {:text "#\u05e9av\u4f29\u204b;\u0540 \u24c3\u0652\ud83d\udc9c\uac52c\u0576 \ud835\udc1b<\u05db\u0316/\u0536" :ids [7 272 10001 1 1 31 234 1 1 32 258 19 1]}
+ {:text "\uac79\uff43\u0543\u0e08\u21cd\u094b #\u1e9dk\ud83c\udfe8<\ud83e\uddc6\u02d3\u0956-\u0560K \u0e4a c<\u0e15 + \u0e19c |" :ids [1 7 1 32 1 17 1 45 32 417 15 419 1283 70]}
+ {:text ";_^ 0gl\u21fc\u2463\u211a\u0333\u030e\uff0f\ud835\udc33\u057f\u0e2b,\u2127\u3011" :ids [31 41 40 1 998 1 16 1 1]}
+ {:text "o\ufb03\u05e8 \u4f33\ud835\udc25O\uacab c\u0928\u03a7@bk\uac1f{\u1ecf\u0963}\ud83c\udf18\u0406\u0962\u0359 \u03dc\u30b6" :ids [1 1 1 45 15329 15203 36 1 69 57 71 1 1]}
+ {:text "\u4e30\u02fa\u0450\u03ce Hk\u06fe \u3022\u0165\u1fc3\u24e7\u2003" :ids [1 1 1 1]}
+ {:text "<>\u0203\ud83c\udf90\u04d3\u0e1c\u2368" :ids [32 34 1]}
+ {:text "\ud83e\udd2ch( \ud83e\udd73B K^\u064fP(\u0356\u0255 =\u210c} \u24a9\"\u2203" :ids [1 12 1 53 40 58 12 119 33 1 71 1 6 1]}
+ {:text "\u0353 ?\u232c+\u30d5+4 \u0471\u05e5\u04ee\u1e7b\ufb06\u232e\u0531\u2114 !|\u0e12M>%\u24fe\ud83c\udf9c\u0957\u1eb2\uff0b" :ids [35 1 15 726 15 24 1 5 70 1 34 9 1]}
+ {:text "Z\u4fc3E \u4ed4\u0e217F\uac92\u0395\u056e" :ids [68 1 47 1 1]}
+ {:text "\u214b\u306cJwE\u21d8 S~l" :ids [1 61 72 54]}
+ {:text "c\\|\ufb04\uac55\u3049\u2124dJ[\u0267v\uac1e\u03d9 \u205dQ \u1f82" :ids [45 38 70 1 37 1 1 59 161]}
+ {:text "\u054b\u01ec \u0314\u01e0\ud83e\udd40PI\u04d2\u0442P \u05d35 \u24ba\u00a5\u011e\u4f644\u057a\u066b\u1e00x\ud835\udc37" :ids [1 1 250 1634 1 1 24 15246 1 1]}
+ {:text "\u3072y\uacb2\u4edf&$\u04a7r b\u247a\ud835\udc53mJ\u21ea \u00ab\u05d8\ud835\udc10\u02b4,J\u038c" :ids [1 1 10 8 1 1 83 1 16 52 15196]}
+ {:text "\ud83d\uddcd\u235e\u0265\uac02R\ufb04Dj\u4f79\u210c:d2\u1fc9ov [ n\u4e79 \u032b\u06bci=\u0306\u0e2c\ud83d\ude066" :ids [1 1 1 30 46 1480 15189 3490 37 56 1 1 33 1]}
+ {:text "\u0559\u0207U" :ids [1]}
+ {:text "s' n\u044b\ud83e\udd60\u0441\u05de\u0114 \ufb01\u031fj\u05d0K\u2206 \u2469\u033f\u24de\u2012 " :ids [61 11 1 990 2504 15254 1248 15588 1 521]}
+ {:text "\u02bc\ufb04@\u00d3\ud835\udc69\u04f8\u03a3 Q %\u4ed79IG\u02d0H\u013a" :ids [1 36 1 59 9 1 29 6940 14364 6273]}
+ {:text "S\ud83d\ude44 l\ud835\udc53\u211e\u0282\u00e1\u24b1\uac0e\u4feb i\u02c6|Y\u4f38\uac54 \u0157\ufb02\ufb01\u05d9\u0556X \u0e22\u2007\u06fdjf" :ids [1 1 1 1 70 67 1 1 1 422 1]}
+ {:text "\u0413=\uff39\u204fD\u3013f\u03d7\u2036\uac33 \u4f759 \u1e28\u4f5d\ud83e\udd25 \uff2d\u214c\u2142\u1f23\ufb04 \uff52\u05e8\u0576\u0354KI" :ids [189 33 1 1 1 1 1 1 29 50 1 1 1 1]}
+ {:text "\u02a5\ufb02a\u0363\u2121B \u0498\ufb06% \ud83e\udd4f\u2032 /\u0321# $R\u054c\u04ea\uaca4" :ids [1 1 9 1 537 19 7 8 1]}
+ {:text "o\uac38 \u3055( \u035c ^\uacb2\uff38.E;\u05e91\u065eW\ud83d\udcaf\u2050\u0323\u212f\u03c6\u05e6**\u2469n \uff36z" :ids [1 662 12 40 1 18 47 31 1 1 1 14 14 1 1]}
+ {:text "\u307a\u301c K\ufb04\u0306n \u206c\u027f\ud83e\udd58\u0567`~ '" :ids [681 651 1 1 42 72 11]}
+ {:text "\u248b Tk\u206ae\u0e5a \u035b\ud83d\udc20\u05d0\ud83e\uddc6\u24b4\u02cb\uac22 \u4e02" :ids [1 62 2492 1 1 1]}
+ {:text "\u4ef02\u4f4f" :ids [1 22 1]}
+ {:text "-\u3067 \u2112\u0e22\ud83e\udd12\u30d2\u03ed \u212f \u024f\u05d95\ud83d\ude3a\u02c0q\ud83c\udf12\ufb00u\ufb06 " :ids [17 671 1 1 1]}
+ {:text ",G\u1e19 \u06b7FU`\u028f? \u06ce\u202a \u04e1\u02ef\u4f2a\u0977\u05d4~\u0957\u0578 \\ \u044f\u017d" :ids [16 12642 1 42 1 35 1 1 1 1 72 238 38 216 1485]}
+ {:text "\uff32\ud835\udc77\u0310Vm\u012f \u204a\\h$z\ud835\udc68\ud83e\udd61\u23f7Nu\u229aN\uacca <\u4e8a U\u1f3a0" :ids [1 1 38 50 8 1 32 1 63 13288 1697]}
+ {:text "T\u30f3\u034c\u0293\u0e40\u4e52 " :ids [1 1]}
+ {:text "3/nG \u020c\ud83e\udd2d\ufb00\u4e2b\u0617\u300d\u2058 \u0e39,\u00cb\u068d\u4f2el \u0686\u0e24\ud83e\uddf1 \u0581 \u091b\u0e04\ud83e\udd33\u02f2l" :ids [23 19 11004 1 1 648 1 16 1 1 54 1 1 1]}
+ {:text "\u24c9C6\u2140* \u0280\u24f6 <\uac55 \u4fa1 ~ \u2023k" :ids [1 14 1 32 1 1 72 1 53]}
+ {:text "\u0106Q\u30ecDO\u0396\ud83e\udd49!\uff38 \u0e4cV" :ids [1 5 1 64]}
+ {:text ".!\uff14\u1eb1S\u200f\u095by%\u00c5\u0e1b\u06b9\ufb06ZU\\ " :ids [18 5 1 9 1 38]}
+ {:text "\u211a\"eg.&[\ud835\udc5f \ufb03 \u0132 Et\ufb06x\ud835\udc33i X>\u4ffe\ufb02\u24b2\uace1\u0455\u214a\u094e" :ids [1 6 47 1295 18 10 37 1 1 1 1 66 34 1 1]}
+ {:text "#\u02a5\u036au\u02d4\u02c6 \uff48 X\u1f3d \u02b2\u010fZ \ud835\udc72\u04f3\u0386\u095e\u0160\u01eb@^ " :ids [7 1 1 66 13288 147 1100 1485 1 36 40]}
+ {:text "\u1e09\u212e\u016e\u1f9c[\u2012\ufb02 G\uff0e\uff12\ud835\udc80>%\uac4f\u0929t0\ud83c\udfa2\u0941\u063b Ax\u0945\ufb03!" :ids [1 37 521 991 49 997 1 34 9 1 1 5]}
+ {:text "\ud835\udc97X\u030d\ud83e\udd59\u0e37\uac96\ud83e\udd2e\u220b/F\uff4d\u237f\u0e5b \ud835\udcb8" :ids [1 19 1 1 1]}
+ {:text "\ud83d\udc3e^ Jf\u2130\u0256,\u055f\u05d5^\u3027M\uff2amM\u02d6" :ids [1 40 1 16 1 252 40 1]}
+ {:text "\"\u4f48\u0253J\u2102\u24d4 \u0322A\u05d2" :ids [6 1 1 43 15256]}
+ {:text "_\\ \u095d\u2486\u22e5\u0265\u0658 \u03f7<l\u0302\u204b< I3\u0396\u05d1=+\u1e4f\u0449 (\u2310\u034c\uff50\u01e8\u302a" :ids [41 38 1 1 32 54 1 32 51 1514 15190 15255 33 15 57 15220 12 1]}
+ {:text "\u1f0b \u0405\u05d5\u039b \ufb01Bm " :ids [161 1 990 1502 1218]}
+ {:text "8 \u0e13\u02ab\u308f\u033b\u2004 Y\u0973A\u02c9 \u24931\u1fe0\u0169]M.\u0e53\uff44]A\u1f94" :ids [28 1 1 1 39 55 18 1 39 43 14568]}
+ {:text "\u05deC\u02af\u0534 \u013f\u027b\u02bc/T" :ids [1 1 19 62]}
+ {:text "f\uacb6\u03a1\uff5e\u0330uW\u4e7e\u229c\u05d5\u2101\uff56\u064f\u023c \u23d5\u0108:\u03e5\u015e\u0e15- n\u4eda \ud83c\udf0c\u018f \u1e12@" :ids [1 1 1 1 30 1 17 56 1 1 46 36]}
+ {:text "\u203b\ud83d\udcd2O\u24ab\uff25\u06acf0O\ud83d\udc80\ud835\udc24v6@Mcao\u0556/ \u214a?r\u4e95\u2012D:" :ids [1 1 36 1 19 1 35 60 760 521 46 30]}
+ {:text "\u2119+ + \u1fb3\u037e \u03db\u0219\u093a> \u0281\u2103\u0939_ F\u0144 \uac2b " :ids [1 15 15 161 31 1 34 1 41 48 1084 1]}
+ {:text "\u2036\u02ed&\uacf1 \ufb04\ud83e\uddb1\ufb02z \u0634\u205c\u0282\ud83c\udfcd!\u4e85e X\u24b9$\uac7c\u0e48\u05e1G!b " :ids [1 1 10 461 15477 15490 1 289 1 1 5 1 47 1 8 1 5 44]}
+ {:text "/)# xq\u0357N" :ids [19 13 7 66 3158 1084]}
+ {:text "\uff1f>Yz\u1e1e\ufb05\ufb01 \u00c1" :ids [1000 34 1 43]}
+ {:text "\u0283\u0e0f \u090a;]\ufb010" :ids [1 1 31 39 990 1697]}
+ {:text "\u01f9\u22d0\u2017# =(\uac0f\u0e50c\u2027jf2\u2138b\u014a\ud83e\uddc3\u04b1\u0254" :ids [1 1 7 33 12 1 1 1]}
+ {:text "\ud83d\udceei`< %\u0572\ufb03 B\u213a[\u03a0 \u06dcPz\u04cb\u062d\u01c0X\u2223\ud835\udcdb" :ids [1 42 32 9 1 1 37 176 1]}
+ {:text "g \u4e65\uac6f\u03e1\u0274 " :ids [49 1 1]}
+ {:text "\u00da \u1edf \u2270`: \uac99O?f \u014d\u0584$\ufb06\u24e1\u0313\uff5bxK\uff5e\u0304\u246f" :ids [63 57 614 42 30 1 35 48 57 15252 8 1 1 1]}
+ {:text "f \u0916 cT\u2041\u05e8\u01af yj6{/\u1fde\u0940)\u0e02\u0495ba\ud83e\udd8e\u0534\u211d\ud83d\udc7at\u0109\u030aB" :ids [48 322 12125 1 271 1231 67 2504 1580 69 19 1 13 1]}
+ {:text "\u246d]/\u0110\u0179\u246a\uff53^^" :ids [1 39 19 1 40 40]}
+ {:text "*\u018dr\u0e0a\u05e0X\u1fbf" :ids [14 1]}
+ {:text "\u0944\u0656]\u0641\u0195JZ\ud83e\udd51\u3032 \ud835\udc58Q\ud835\udc6e\u0158D 2'K{ \ud83e\udd4b< \u2477 q" :ids [39 1 1 22 11 53 69 1 32 1 59]}
+ {:text "\u0e0duy\u3008N \u0356\ud83d\udc99R \\ \\T\u305c Z*\uac6b\u247e " :ids [1 643 56 1 38 38 62 15651 68 14 1]}
+ {:text "\ufb03\u05d5\u0160 \u0544 \u2498\u0574\u05ea \ufb00\u00d9 sH'U" :ids [1 235 1 1 11675 11 63]}
+ {:text "p\u4f1b\u0e4c\u0e1cK\u05d1\u0536 \u0e03G\u205d \ufb02!\u036d\" _\uff50P\u2110\ud835\udc88<\u214br\ufb00 \u03f5 " :ids [58 1 1 1 1 991 5 6 41 1 32 1 1]}
+ {:text "`\uac16 \u2127 \u04ac\u200d\uac5a\uff274\ud83d\udd48\uac4d \u093dB\u0458` Z\u24bf\u05ea\ud835\udcaa M\ud83d\udd89%\u033d\u01be\u213f\ud83e\udd24\u05d4\u06b5" :ids [42 1 1 1 1 42 1 1 9 1]}
+ {:text "e tr\u2371 Y\ud83e\udd01 \ud83e\uddb5\u0913\u033d/A\u213e\uac56\u0567\ufb05h\u1fcf\u1e7c\u204b \u03c9\uff41\u0e54\u0956 E" :ids [47 1 1 1 19 1 1 1 47]}
+ {:text "\u2214\u02cf\ud83d\udc590\u0178 z\ufb03\u037c \u23e4 c\u2113\u010d\u038c" :ids [1 1 1 45 15571 1283 15196]}
+ {:text "\u1e6c\u0106 \u0283NU\uac83\u0348 \ud83e\uddf3\u1ef9\u0539\u010a F" :ids [14284 1 1 48]}
+ {:text "\u039f\ud83e\uddc0\u0234\u2483` \ud83e\udd64\u05d2\uace4 \uac50cGD\u05e1\uacceH\ufb05\\\ud83e\udd7aZp\u0542`,\u057a^\ud83e\udd40 \u247b\u040b\ufb06 " :ids [1 42 1 1 38 1 42 16 239 40 1 1]}
+ {:text "\ufb03#e\u00d9 \u0330\u00c6\u30f6 >\u0919\u0308\u0303" :ids [1 7 6283 1 34 1]}
+ {:text "\u09401I\u0666\u2106\u0184\u06c9+=\u30b4 \u03ad\u0537\u0307d \u02b0+\u094bl\ud835\udc92\u05ddk\u210c\uacbe<_\u05e6 " :ids [1 15 33 710 1 146 15 1 32 41 269]}
+ {:text "\ud83e\udd2cw\u031f" :ids [1]}
+ {:text "< 5z\u049e \u0326\u4e68" :ids [32 1 1]}
+ {:text "\u0908\u1f88\ufb06\u0550\u01ab\"A" :ids [1 6 43]}
+ {:text "\uac76\ud83d\uddc99\u0348\uff2e\u1f29)\u06ad\u1f2f\u1e14W\u24a9\u3046 v\uff02 \u21c2P" :ids [1 13 1 64 1 1]}
+ {:text " \u4fcc\u0e2e" :ids [1 1]}
+ {:text "\u01a11\u210c \u04b7\u0603',\u05e1\ud83e\uddec\u03a6S\u03abd\u0345 6.\u1fb3 u" :ids [1 1 11 16 1 26 18 161 63]}
+ {:text "c\u2143\u0445& ! } \u05d9 \u0e32\u204c\ud83e\uddee2\u21e9\u4ec3," :ids [1 10 5 71 256 428 1 1 1 16]}
+ {:text "\u4e3b\u05deKN+" :ids [753 261 1248 1084 15]}
+ {:text "y\ud835\udca9f \ud835\udc2f\u01bbfK&\u05e9\u0391c\u0e2f\u1f7d\u0358\uff21\u2124 " :ids [1 1 10 1]}
+ {:text "\u0966\ud835\udc2e\ud835\udc95\u211f\u21b2 \ud83e\uddbc" :ids [1 1]}
+ {:text "\u202b\u03de\u2110\u2039\u2493\u02eeN\u05d6\u06ba\u057e\ud83e\uddb2\u02b5\ufb03\u097b\u0586N\u011f y {\uac34VL\u230f\u2001\ud83d\udd8a\u0561 " :ids [1 1 1 67 69 1 1]}
+ {:text "\u0188\uff4bt\u02e1\u029c2:\u00f0 \u200d\u4e0eL\u1ee8Mf5^\u0140\uac4f?\u062ak\u0902R{\uff54} \u05d2\u0352\u0333 " :ids [1 30 104 1 9914 1218 1551 1634 40 1 35 279 14061 69 1 71 249]}
+ {:text "'X\u0e09 K\u2244 \u039f 3\ud83c\udf46/\u05dfF< \u24d9?\uac43\u0968 " :ids [11 1 1 175 1 19 262 1551 32 1 35 1]}
+ {:text "\u2056U\u24d7m\u05e9\u034d\u0572\u1e19 \u0e55\u30d2i Z\u0e06m\u0261\u04636  \u4f70\u1eb8E Q\ud83e\uddc9\u093c " :ids [1 1 1 1 1 14622 1]}
+ {:text "\u0301\u2118Wy )\u4e7a\ufb01\u2005' \u232b\u2279\u307a\u05e7\ud835\udc8d\uff0a\ufb03\u2008\u0103m\u02e35\u2008\u0659\u0257\u03f1-7n\u02c0\u03a4" :ids [1 13 1 990 11 1 1 1 1577 15184 1634 1 17 1]}
+ {:text "\u0e0c\uff12\ud835\udc65\u249fA\uac87 \u03f1 6q\u2282 \ud83e\uddc8\u019b \u01fe\u203a " :ids [1 1 26 3158 15603 1 106 539]}
+ {:text "pq\u06c0L\u0911\u043dD| " :ids [1 70]}
+ {:text "\ud835\udc57\u0e16\ud83d\udd7f\ud83d\ude10" :ids [1]}
+ {:text ":9\u206dspun\u0634\u041b h9\u0949" :ids [30 29 11170 3607 15291 15058 1]}
+ {:text "\u036d ^C\u4ee7hm\ud835\udc97\u0e39;P\u0291\u035fJ \u24a5 9\u054a" :ids [40 45 1 1 31 58 15169 2504 1 29 15246]}
+ {:text "m~ \u0e3a\u0573\u2035\u246d\uff18 \u0375\u0472\u226f}\u04af\u0331\u2140\u05ea\uff58\u24d7k\uac7e\u0688\u2058\u30c1\u4ff6\u2132\u1ff2\uff50" :ids [55 72 1 1 1 1 34 71 1 1 716 1 1]}
+ {:text "\u0313\u2062\u210e\u0e36 \u1f8d_^\u0968\u00df3P\u4ff6 \u0385uD S\u214f\u0395\u2212 \u043c" :ids [1 161 41 40 1 1 80 5758 1 197]}
+ {:text "\u0552\ud83d\udc6d\u0165'Y\u4ef6Q \u0319 \uac00O \u2145\u0586  >\u055b\ud835\udc93\ud83d\udccc\u2018I N\u206dAr\u1fcd\uff51" :ids [1 11 67 1 59 461 15472 1086 1 34 1 1 526 51 1]}
+ {:text "\u02c9q\uacd3\u01c9t k" :ids [1 53]}
+ {:text "\uacdf\u246dt\u0464\u040d\uac87\u2139\u0283*\u2148o\u206e\ud83d\uddf1\u0246 \u040b\u0169\u303aO b\ufb02\u4e96 O \u0278 " :ids [1 14 1 1 44 15977 1 57 1]}
+ {:text "\u3088\u0956\u0e06\u038e\u4f59 \ufb02IvT b \u3092\ud83d\ude2c\u301e.\ud83d\ude48" :ids [1 1 991 11011 1108 44 1 1 18 1]}
+ {:text "\u4f48\u015b\u0321\ud835\udc202\u0446\u0555\uaccfx\u0e08\ud83c\udf67\u24ea\u0e33O\u0532\u1e6c\u221e" :ids [1 1]}
+ {:text "\u00e7g\u05e5\u307f*\u24ee\u210e\u0967f,\u2103 \"\u0e13 \u2484\u214c\u03b4\uac1e\u2116\ud835\udc81m\u054c ^\u247d\u1e1f =/w" :ids [45 1295 15274 15670 14 1 16 1 6 1 1 40 1 33 19 65]}
+ {:text "\ufb03\u00e9\u22c6\u0e02 \u1eea?\u2344\ufb05\ud83e\uddbc\u05dd\uac72 \ufb01`\u247c \ud83c\udf33\u02ef \uacffB\uac55\u0331\u0367^'\ud83e\uddcffk\u058f " :ids [1 63 35 1 990 42 1 1 1 40 11 1]}
+ {:text "\u06a3\u0e56s\u06c1k\u04db1I\uace8\uff23#\u0385f K\u019c\u03f4'\u4e77\u2009\u21166\u2113" :ids [1 7 80 1551 53 15154 15191 11 1 584 1580 15571]}
+ {:text "nF\uac06S\uaca2\u01a3\ud83e\uddb8\u1f2d\u0344\ud835\udc37\ud835\udc69\"iT f" :ids [1 6 1015 48]}
+ {:text "f]\u06fb \u0254 ?\u1f45 \uff52 \u0e0e$\u4ee0Nk\u0554\u03e4/\u0e4a\ufb02\u0298" :ids [48 39 1 118 35 175 1 1 8 1 1 19 1]}
+ {:text "\ud83c\udf31\u1e3c\u048f\u1e8e\u2066tn9!\uff2dNA ai\ud83e\udd91\u06a3 " :ids [1 5 1 1]}
+ {:text "+a`\u2002^q \ufb06\ud835\udc49\u206a \u0578|S\u2058(\u24a0\ud83e\udd4d\u0e1fZ\uff47m\u01fe 5\u3075" :ids [15 43 42 40 59 1 238 70 61 1 12 1 25 15666]}
+ {:text "\u03e1\u03e9\u202c\u2009 G " :ids [1 49]}
+ {:text "\ufb03\u01ee\ud83e\udd02F\u4f6a\u2275 n \u042d" :ids [1 1 1 56 214]}
+ {:text "e5\u2149" :ids [1]}
+ {:text "\u2147^\u030aT]V\u0429\u30f1\u203e~\u2016!7 ik\uff16\"R \u0271 \u03c3\u036a " :ids [1 40 62 39 1 1 72 525 5 27 1 6 60 1 179]}
+ {:text "0\u0647\u4e395\u03b9 \u309b" :ids [20 11740 1 25 13288 1]}
+ {:text "v\ud835\udc0b\u0171\ufb03\ufb04 \u1fdb \u30d2x]|&\u0539\uff50\uac1a\u0321G\u210a\u0395 \u045cSw\u05d3/\u0276Zb\u24f5\ud83d\udda2\u036b" :ids [1 169 725 1600 39 70 10 1 195 14791 15257 19 1]}
+ {:text "\u01d1r\u03f8\ufb00r\u235f^\u0443 \uacd2 \u1fb2 u\u06b4" :ids [1 40 204 1 161 1]}
+ {:text "u\u2030\u03fa" :ids [63 536 1]}
+ {:text "}\u0e53\u0966\u027a}$ " :ids [71 1 71 8]}
+ {:text "\ud835\udc28\uff51E" :ids [1]}
+ {:text "7gD\u1f2f\u23c8 \u03c1Gj #\u057f " :ids [1 177 1295 2504 7 242]}
+ {:text "b\ud83e\udd87 \u0545\u206a\\ \u03d1uS8K  \u248e\u0646l\u210c(\u046e: " :ids [1 236 38 1 1 12 1 30]}
+ {:text "<\u013c7L\u05dcu\u0e2c4\u0917f\u029ak \uff33c\ud83d\udc6d\u056f\uff2c\u24b3\u306e5\u0454\u1e0d" :ids [32 1 1]}
+ {:text "'*w\uacd9\u0904\ud835\udc5a \u307e \uff03 k" :ids [11 14 1 683 1 53]}
+ {:text "\u1e3b1\u2034\u057b\u0606 \u204b\u204b+2\uff56\u2140\u03a4 (\u1f79\u05e1\ud835\udcbeV\u0646\uff18 \u03fd\u30cc@\uff1fE" :ids [54 1492 1 1 1 1 15 1 12 1 1 36 1000 47]}
+ {:text "\u0e57\u210c\u0461?\u3049\u211e\u4fe7@;\u2014\ud83c\udf28I\u308b\uff4a 6\u037e\u3099\u0538X\u22e4H\u032a{ \u01bbZ\u4e81iW" :ids [1 35 1 1 36 31 523 1 26 31 1 69 1 1 51 1865]}
+ {:text ")\" Q\u03abs\u0904 \u4fe7I\u05d4" :ids [13 6 1 1 51 15023]}
+ {:text "[\u01e5 \ud83e\udd06\uac35W5\u220d\u04fdo\ud83e\udd2a;D\uff52\u3065" :ids [37 1 1 31 1]}
+ {:text "~\u06cf! \ufb06\u1f60(7\u202b\u1ee8\ufb00C  vAi\u091a \u248a}\u4e22;.~\u2135\u054f\u05d1" :ids [72 1 5 1 12 1 10754 1078 15320 1 71 1 31 18 72 1]}
+ {:text "+\u0e0f\uff50\u020c\u234c\u0498y\uac4c\u2377\u033e\u22e3\u4ed5\u03c6\u05d7\u0452om\u0e36E\uac70\ud835\udc58\u4f8b,F\ud83c\udfdb]\ud83e\udd5d\u096f\u0294\u0e13" :ids [15 1 1 1 1 16 1 39 1]}
+ {:text "\ud835\udc0b2\uac68 \u02a5\u0e07\u032f" :ids [1 1]}
+ {:text "\uac15R \uff53\ud83e\udd57 \u05e0\u24ec\u0e46I `\u4f5fmG\ufb01 \u00b9\u302b\u2136\u00c5r" :ids [461 15472 15491 1105 1 1 42 1 10025 15976 1]}
+ {:text "$ \u0662 \ufb02\u029b'+F\u24c4\u0625\u0296 4\u04017M\u03075\uac17" :ids [8 1 1 11 15 1 1]}
+ {:text "U \ud835\udc1a\u228c \u033e\u211f\uac5b\u00a2\u01cf\u02cbn\u24a8\u1ff9!\uff57\u0173\u2469\u053c6\ud83d\udce8\u046f)` \u308cw`\uff50 n" :ids [63 1 1 5 1 13 42 694 1865 42 1 56]}
+ {:text "v8 = A\u200d\u0601\u00eb\u04aa?\u0949\u01ddc \ud83e\udd91t\u05e4/\u24e5\u24d0\u2251Fz\u0210\u01ab'\u0364 \u097c" :ids [64 1625 33 1 35 1 1 19 1 11 1]}
+ {:text "\u05e9\u0249\u0555 \ud835\udc6a\u1f4b\u210c\ud83c\udf00\u2027\u24fd\uacfd\uff5b\ud83c\udff9 ;\u03e9\u0532 \u24c0\u307cqI\ud835\udc9c\ud83d\udd4e\ud835\udc73\ud835\udc2c" :ids [1 1 1 1 1 1 31 1 1]}
+ {:text "\u05d3\u0362\u0632Z ]*I\uff26\u05d9\u026b 7\ufb02\u03abY&H\u24de\u4e87\u0e2d>\u0546\u06b0}" :ids [250 15289 1485 39 14 1 27 15977 15201 1106 10 1 1 427 34 1 71]}
+ {:text "\u0374\u2100\u1f91\u4e23^ o#\uff2d\u00c8\ud83e\udd94 \u019a" :ids [1 1 40 57 7 1 1]}
+ {:text "\u235d. \u2190\u0e3a\u054a \u247f\u30f5\u05de\uff4d \uacc3\ud835\udcfe\uff20\u2485t\u05d4\u4e08\u2359\u211b\u1fbfq" :ids [1 18 589 15246 1 1 1 1 1 1]}
+ {:text "<C \u05e9\u2494\u05dc\u2112]\ud835\udc7a\u0680 |\u0216(\u053f8" :ids [32 45 1 39 1 70 63 12 233 1625]}
+ {:text "\u00e3 H\u0612G  \ud83e\uddcb\u1f9f\u030c Rx\ufb06W" :ids [43 50 1295 1 1]}
+ {:text "/\u2145\u054bt \u0659\u30a0#Y\u211e a\u0e14 \u30df\u202dD \u05e4" :ids [19 1 1 7 1 1 730 1100 267]}
+ {:text "t\u24ac\u0152\u0964t\u06bf\u2109,\u1f9a\uff42gx\u4f97\uff4ar\u4ee5 k.\u2253z\u00fe\u0151 \u1fdfp\u03550\u0101\ud835\udc41|" :ids [1 350 1 16 1 1 1 1 53 18 1 1 70]}
+ {:text "\u300c\ud835\udceakG\u0358\ud83e\udd3d\u0562\u24de" :ids [647 1]}
+ {:text "\u05816\u3053q\uff0e\ud83e\udd91" :ids [1 997 1]}
+ {:text "cL@\u053at`" :ids [13466 36 1 42]}
+ {:text "\u4fc7\uff5cX \ud83c\udfc0e\u30af \u24a6s\u037684\uac2ba \u0929 B\u034eG\u0102 \ufb00-X\u0970\u4ffb\u0323 " :ids [1 1 1 1 333 44 2656 1 17 66 1 1]}
+ {:text "hG\u060ea\u06cfG9\u2002\u3037\uff49(\u211b\ufb00 \u0330 \u3022\u0419Hf \u1e7fo \uac8d\u1fdb\u1e6b` " :ids [1 1 12 1 1 15074 461 15475 15486 13288 1108 42]}
+ {:text "\ufb01\u4ecb ~ \u0184\ufb04\u03a8\uff26\u4ea8&\u2054\ud83c\udf54" :ids [990 765 72 1 1 10 1 1]}
+ {:text "Ej\uac38\u05d0" :ids [1]}
+ {:text "\u24faz0\u0398\u017f\u4ec1\u00a4\uac19 \u0692\u0479\u2473w\ufb06\u0e02 \u0e44\ud83e\udd72\ud83e\uddb5\u2199\u00ad\u0482 -\u2113 9\u24f1C\u03c3A" :ids [1 764 1 1 1 17 583 1]}
+ {:text "| \u2125\ud83e\udde2C\u03b1}\ud83e\uddf7\u23c7" :ids [70 1 71 1]}
+ {:text "\ud83e\udd32+\u01ac \u02fa |\u1f66 \ud835\udce7\ufb03p\uaccfa\ud83e\udd06\u3091\u0e29\u010bE" :ids [1 15 1 1 70 185 1]}
+ {:text "\ufb00\ud835\udc22%\u03eec\u21ee\u0185GKc\u0552\u02e81 \u205c%\ufb04n\u023b\u055c\u05e3Eg\u0371 \uac34\u4ea2\u04acS" :ids [1 9 1 1 9 1 1 1 1 1 1]}
+ {:text "yG\ud835\udce0 \ufb00s\u05daU\u2030 @\u0350 z\u045d\ufb00~\u1ea5 #\u3094\u04c6\u3042 r\u4faa r\u096dc\u30f1" :ids [1 1 536 36 1 72 43 7 1 60 1 1]}
+ {:text "c\u4e01\u4f17\u2245 \u0490\u03152\u0245 " :ids [45 1 1 1 1]}
+ {:text "\u0357\u0142|\u0451\u0658\u22e4O\u035cQd\u022e\u30dby\uff1c\u0323 \ufb04\uad00\u0e49Y\u3033 \u01a9\ud83c\udf26< " :ids [111 70 1 1 1 32]}
+ {:text "\u0466\u2143^ " :ids [1 40]}
+ {:text "\u0961\u22b0(\u093dH_\uac97 \ud835\udc86\u4fee\u1f5b(\u00ec" :ids [1 12 1 41 1 1 1 181 12 51]}
+ {:text "\u0207\u2007hE \u0141\u0e12F\u0377\uff39 Z" :ids [47 1008 1 68]}
+ {:text "\u00edn \u2487\u24aaK\u214e\uac8e\u2484\u3045\u24d15 D\u0910m\u02cb|\u0368[y\u247e\u24ba\u05da\ufb01\ud83d\udde7~ vR " :ids [1005 1 1 70 37 1 72 14902]}
+ {:text "\u06e7\u2220S1N\u303f g o\u016f\uff14 #\u06c6\u246cu\u03de " :ids [1 49 1 7 1]}
+ {:text "\u0164\u02f8\u06b9 \\\uacf3 \uff56\uac78<" :ids [1 38 1 1 32]}
+ {:text "\u21df\ud83e\udd0c\u02ca \ud83e\udde8i\u0580 \uaccd\u0367j v\u05e6\u067da\u094ek \u2112\u204d " :ids [1 1 1 1 1 1]}
+ {:text "W\"\u019dD/\u0667\u2115\ufb02\u036b\u227f\u4e41H\ud835\udc22r\ufb00\u21df\u00e6x\u2144 \ud835\udc28\ud835\udc29\u055f " :ids [65 6 129 1100 19 1 1 1 1 1]}
+ {:text "\ud83d\udd3b\u210f\ud835\udc82f \ud83e\udd7e\u2253\u0e35F \u1e0d\u05e7I\u4e2c_\u016f \u20236\uff09 \ud83d\udc1b \u0283\u02ee" :ids [1 1 46 15276 1078 1 41 63 1 26 994 1 1]}
+ {:text "\u0923\u0968\u09243\u0966\u1eae" :ids [1]}
+ {:text "\u05da\u048a \ud83d\udca6\u0e1f\u4f4d\u0e13\u24dfS\u054d\u02d3 \u0454\uff31\ufb06" :ids [1 1 1 1 1]}
+ {:text "\u05d0\u2052\u0e11+\u00ef\u01b6\u0640 \uacb1" :ids [1 15 1 1]}
+ {:text "\uacb7\u4f03>\ufb06\ufb05\ud83c\udfd1\u05d6\uff14 ^Dn\u06cd sr8\"w\uac67 " :ids [1 1 34 1 40 1 4030 1625 6 1]}
+ {:text "\u30d6\u2379d\u040a\u2143\u0623\u24e6\u0563bSw%3\u0327\u0547%\u06ab\ud83d\udcad \u0175\ud83e\udd09E\u2259\u0539 5" :ids [1 9 1 9 1 1 25]}
+ {:text "FQ \u0419 \u055d[\u092ci\u02aa \u03ec\u4e21 \u30e2I\u0125" :ids [48 3158 194 1 37 1 1 1 733 13557]}
+ {:text "@\u03c78\u064a\u0292\ud835\udc5e\ud835\udc5a\u1e68k!\u0386g\u090f8\u00d5\u0569\u30b6\uac86\"\u036e 7 \u24bf\u05ea\u05d2 " :ids [36 1 5 1 6 27 1]}
+ {:text "\ufb02&\ud83d\udc08 \u1fb8\ud83d\udda9\u00a6\u06e1" :ids [991 10 1 1]}
+ {:text "\u0674%\u4ecc\u24dc\u020a\u02ad\u096c\uff28A\u0574" :ids [1 9 1 1]}
+ {:text "_ M:3\u4e1e\u01aap\u066e;\"\u0966^T\u201d\u02f3\ufb00C\uff14\ud83e\uddc5' " :ids [41 55 30 23 1 1 31 6 1 40 62 530 1 11]}
+ {:text "<z\u05d2\u0232\ufb05\u1eb1dz \u01d1\u05e3 R\u219d{)o\u092d\u0550 \u0308\u22aduz\u030f8 q<$ \uace2" :ids [32 1 57 15272 1 69 13 57 15332 15250 1 59 32 8 1]}
+ {:text "\u03bc\u23de^ \u090a\u035f\u04a8\ud83d\udd57H\u010e\u0481\ufb01\u4f53\u0541\u03fa\u092b " :ids [1 40 1 1 1]}
+ {:text "\u2460\ud83e\udd85@\u2119\uac53\u2131\u1fe1L I\u2149\u05e1\u032b (:\u063dY#\u4e3a2" :ids [1 36 1 1 12 30 1 7 1 22]}
+ {:text "\u019f\u05d8` \u04d1\u1e73 \uac2b\u4ee9y\ud83d\udc7d \u01fd /\uff2b\u03a0D\u02a2G\uaca5 \ud83d\udcc2a " :ids [1 42 186 1231 1 1 1 103 19 1 1]}
+ {:text "\u091d]\u012b\u01a0\u24f8?k\uac56. ,0\u0248\\/\u00b4\u0e22s\u2344\u4fc0\u06b4 #_" :ids [1 39 1 35 1 18 16 1 38 19 1 1 1 7 41]}
+ {:text "r\u011d\u0359" :ids [60 1295]}
+ {:text "]\uff16\u055e\u203c\u0235GD 7z\u2060u \u01c1\u0e59\u0223\ud83c\udf90.\u4e7b\ud835\udc2bl\u30b1\u4ef5 y\u0963 " :ids [39 1 1 1 1 27 8586 1 18 1 1 1 67]}
+ {:text "\u2128 \u205e\u05e4@\u00e1u\u213a\u24a2\u05e9\u0654\u03de\u1e0a C \u214c#\u4f36 \u016b\u02b1 N\u21e9  \u3022\u0100\u062b\ufb02\u2012" :ids [1 1 267 36 1 45 1 7 1 1 1 1 521]}
+ {:text "h\ufb05\u1f22\u213eEY[\u0485\u0480 \u04b4\u24a8\u012c\u058d\uac929\u30eaX\u0128" :ids [1 37 1 1]}
+ {:text "\u2123\uff50`x" :ids [1 42 66]}
+ {:text "G \ud83d\udd9f\u0372\u0e04\u1ffa _\ufb06 ] \u211b \u0334kNp" :ids [49 1 41 1 39 1 11743 1366]}
+ {:text "\u0633\u097d\u068eU\u0140T\u21fc{\u05e6x \u0576\u0575\u4e58T" :ids [1 69 269 1600 237 15243 1 62]}
+ {:text "\u0699\uff2e\u30262 z\ud835\udc9a<\u2037\u1ec4\u4e56,[\u021el\u02da\ufb05^\ud83c\udf96\ud835\udc6d\u03ac " :ids [1 1 32 1 47 1 16 37 1 40 1]}
+ {:text "\uff51\ud835\udc60\u03d6\uacc8 \ufb06-\u05df\u05e5\u0272\u04f8,\ud83e\udd51\u03e1" :ids [1 1 17 262 15274 15155 15021 16 1]}
+ {:text "6\ud83e\udd6b \ud835\udce1 \ufb01$" :ids [1 1 990 8]}
+ {:text "\uace5\u054d\uff54 \u04d2\"\u1e16\u01a6\u0555(\u30fd \u249e\u200d=k\u0960fG\u2483\u0202Z\ud835\udc74\u303e\u030f$C" :ids [1 186 6 1 12 1 1 33 1 8 45]}
+ {:text "\u2381 \ud835\udc99M\u03d3\u04f0\u0549\u092b\uac74" :ids [1 1]}
+ {:text "\u1e82\u0110\u05d8V\u0649^\u03df\u1e26 \u24c0PG\u2119\u03c1  \ufb01\u4f8a " :ids [65 15137 15261 1620 15303 40 1 1 990 1]}
+ {:text "\u1ef7\u201e?j\ufb06` \u3015" :ids [67 531 35 1 42 1]}
+ {:text "\uff17u\ud83d\ude3f" :ids [1]}
+ {:text "<\u05d9\u057bL@\u06d8 \u02a5\u0361O \u214e\uff2b " :ids [32 1 36 1 1]}
+ {:text "_\u0e50\u2043 \u2290\uacf1=E \u2392\u24bb\u00a0B " :ids [41 1 1 1 33 47 1 44]}
+ {:text "\u00c5:\u0575 \uff544n T \u0187\u04ff\u3043@U \u2460\u040a\u30e3" :ids [43 30 236 1 62 1 36 63 1]}
+ {:text "\u00db@^U \u053f\u2380\u053f\u04d8 " :ids [63 36 40 63 1]}
+ {:text "\u0438U\ud83d\udce9\uff1a" :ids [1 999]}
+ {:text "H X\u03bc \u1f6e _\u2399\ufb02Ef6r\u0e49Nr|\ud83e\udd5c{\u4f10" :ids [50 66 15194 185 41 1 70 1 69 1]}
+ {:text "\u0940\uac32e\u0282\"\ud835\udc0e\u0204B\u2020\u054dl\u0231n,S\ud83e\udda1\u2052\u05e5\u30b0\u00eeW\ud83d\udcdb\u05de\\\u037b\u06e3\u0688\u03e7\u053a\u04dey" :ids [1 6 1 532 240 6751 16 1 38 1]}
+ {:text "\u0e53y\ud835\udc08C\u013e\u0357\u210d7\u30e4x\u211e\uac7b\u4e9bI\u2105\u4f90|5\u22c5\u017a\uff59\u22d8" :ids [1 1 1 1 70 1]}
+ {:text "74 p\u24be\u21a3\u3074& \u4ee6\u30b1 C\u204a\u309e2\u035b" :ids [5335 1 10 1 709 45 1 1]}
+ {:text "\u03cf\u0955 \ud83c\udf10\u24a7\u03afx6<? l Y\u02e2\u05e8\uff58X\ud83d\uddf1\u092d\ud83e\udd96\uff57 \u4e4b" :ids [1 1 32 35 54 1 755]}
+ {:text "%\ud83d\udd4f>\u097b\uff529X\ufb06|\u2102\u1e01}M[%\u210b \u05eaA" :ids [9 1 34 1 70 1 71 55 37 9 1 273 1056]}
+ {:text "o\u4e89\ufb06\u2105\ufb03\ud835\udc8aqGY \ufb06 V\u093c& \u2138O\u03c8 \u0934\u2064\u0387\u222e\u0560" :ids [57 1 1 1 64 10 1 1 93 1]}
+ {:text "\u30b27h\ufb05\ud835\udcfd[ \u1e42e\u203d\u2104 I n&g " :ids [1 37 1039 1 1 51 56 10 49]}
+ {:text "|\u0359\u307f\u043f\u1fb3\ufb00\u0348\u012f`\u05dfR\uff4e[C " :ids [70 1 42 1 37 45]}
+ {:text "\u030a\u01e0-z \u0e33T\u033d_ \u019e\u03b3" :ids [43 17 68 1 41 1]}
+ {:text "\ud83e\udd0d D7" :ids [1 46 1586]}
+ {:text "\u0113\u02adm\ud83d\udcdf\u0362 \u057a\u060c! \ufb06 \u090a\u1f45\u06b6D\u4f1e=U" :ids [1 239 274 5 1 1 1 33 63]}
+ {:text "\ud83c\udf12\u4eb9)\u300a\u1edd\u0207 \ud83d\udd9ba\ufb03\u3020\ud835\udc0c \u035a \ud83e\uddcbu=f2\ud83d\udc85a\u057c" :ids [1 1 13 645 57 1069 1 1 33 1]}
+ {:text "\u2130\ud835\udc8dC\u061b ,k \u06a4\ud83e\udd80\u021c r\u013e\u4e51\u2037\u303a= `&>i" :ids [1 1 16 53 1 60 1145 1 1 1 33 42 10 34 51]}
+ {:text "1\u0e5bR\u0e35\u017f3/\u0120\u3028\ud83d\ude1f ^X\u02a0 \ud83e\udd94 \u210bh\u02e7\u1fb0\u30a8\u0e43\u1fa3\u04b1 \u026a+\u030a a" :ids [21 1 1 19 1 40 1 1 1 125 15 43]}
+ {:text "\u21cf\u2057\u1e20\u2063 \u2475\\\u0968 \u0301\uaca1\u054c(\u04edQ \u034e\ufb06\u24bc&\u0542&\u097d \uff1eI " :ids [597 1 49 1 38 1 1 12 214 3158 1 10 1 10 1 1]}
+ {:text "\u0938 \u0901yp\uac4c" :ids [344 1]}
+ {:text "\u4ec5\u01b3 \u0616\u039b \uac66\u053e h\u0199\ufb01pw\u0924a\u4fbf\ud83d\uddd5 \u0133\ud83d\uddbb \u3085F\uac9b9\ud83e\udd45\u055b \u0207Ml" :ids [1 1 171 1 1 1 1 1 1 1 6801 1145]}
+ {:text "\u2034^Y\u0301\u1ed2b \u0442\ud83d\udd98f" :ids [1 40 9609 1502 1]}
+ {:text "\uff382\ufb01a\u303f ev\u2130V \u06b0]\ud83d\uddae\ufb00 \uff267?\u2127\u045d1 m+O'\u03d6" :ids [1 1 1 39 1 1 35 1 55 15 57 11 1]}
+ {:text "\u023eN\u21fe/\u21a8\u4e2d8\u0356\u00ad!\u2123\u0426\u0901\u029ew\u05d6D{\ud83e\udd6e\u00c7c^a" :ids [1 19 1 752 28 5 1 69 1 40 43]}
+ {:text "\u00acC\ud83d\uddeb" :ids [1]}
+ {:text "R6, C\u24ca\u201eY " :ids [60 1580 16 1 531 67]}
+ {:text "o\u040e\u0411< \u045b\u05e1xL\u1e9c \u05d1\u3016\u0972 \u022e\u0e2f (\uff31w\u04e8\u06220\u4fae" :ids [57 15214 15206 32 1 248 1 1 1 12 1 1]}
+ {:text "Q\ufb06\u0353\u06006\uac1b\u0948 \u0100\u0224\u0146w\u201c\ufb05\u4f20O\u21fc " :ids [1 1 529 1 1 1]}
+ {:text "ejg/y\ufb03\u03d8\u0537 \u054d\u2495\u30fe\uac28\u053b \uacc0" :ids [47 2504 1295 19 1 1 1]}
+ {:text "\uff43Z\u048btSc\ud83e\udd5a9u 5m\u2001\u0190 \u0589 \u4fb0i\u4fc1\u2102\u2024 \u0e18\ufb02\u09298`7\u057a\u205d" :ids [1 25 1218 121 1 1 51 1 1 1 1 42 27 15246 1]}
+ {:text ":\u246c\u0345\u24a5\u0573c\u028d\u0e54\u30e2\ud835\udc08\u0384\u0966\uacd8\u02b8\u042b<\ud83e\udd4b \ud83e\uddb5v}\ud83e\udda1 \u057c7q" :ids [30 1 32 1 1 71 1 1]}]

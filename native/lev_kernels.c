@@ -751,3 +751,38 @@ int64_t lev_file_crc32(const char *path, int64_t *size_out) {
     if (size_out) *size_out = size;
     return (int64_t)(crc ^ 0xFFFFFFFFu);
 }
+
+/* ---------------- TinyDecide (lev.tinydecide) ---------------- */
+
+/* Its Q4 matrices, [rows x cols] with cols a multiple of 32: per block of 32
+ * weights 16 bytes of nibbles (byte k holds weight k low, k+16 high, each
+ * offset by 8) and one bf16 scale. */
+void lev_dequant_q4(const uint8_t *nib, const uint16_t *scales, int64_t rows,
+                    int64_t cols, float *out) {
+    int64_t nb = cols / 32;
+    for (int64_t r = 0; r < rows; r++)
+        for (int64_t b = 0; b < nb; b++) {
+            union { uint32_t u; float f; } s = { (uint32_t)scales[r * nb + b] << 16 };
+            const uint8_t *p = nib + (r * nb + b) * 16;
+            float *o = out + r * cols + b * 32;
+            for (int k = 0; k < 16; k++) {
+                o[k] = (float)((int)(p[k] & 15) - 8) * s.f;
+                o[k + 16] = (float)((int)(p[k] >> 4) - 8) * s.f;
+            }
+        }
+}
+
+/* Its int8 matrices: one f32 scale per row. */
+void lev_dequant_i8(const int8_t *q, const float *scales, int64_t rows,
+                    int64_t cols, float *out) {
+    for (int64_t r = 0; r < rows; r++)
+        for (int64_t c = 0; c < cols; c++) out[r * cols + c] = (float)q[r * cols + c] * scales[r];
+}
+
+/* Its attention mask, [T x T]: token i sees token j when j is in i's block
+ * or in the state (block 0), so the state reads only itself and a question
+ * the state and itself. */
+void lev_block_mask(const int64_t *blk, int64_t T, uint8_t *out) {
+    for (int64_t i = 0; i < T; i++)
+        for (int64_t j = 0; j < T; j++) out[i * T + j] = (blk[j] == blk[i] || blk[j] == 0);
+}

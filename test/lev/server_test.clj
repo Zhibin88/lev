@@ -524,3 +524,11 @@
       (is (= ["body" "model"] (loc (second (post {"state" "a" "model" "slow"})))) "a thinker cannot embed")
       (is (= ["body" "model"] (loc (second (post {"state" "a" "model" "nope"})))))
       (is (= 405 (first (call h (req :get "/v1/embed"))))))))
+
+(deftest an-engine-thinker-is-listed-as-not-thinking
+  ;; Clef and TinyDecide generate nothing: there is no thought to switch on
+  (let [rt (router/make-router {:thinkers {"clef" {:engine "clef" :model "target/no-such.gguf" :head "target/nope"}
+                                           "tiny" {:engine "tinydecide" :model "target/nope"}}})
+        [_ b] (call (srv/handler rt {}) (req :get "/v1/models"))]
+    (is (false? (get-in b ["thinkers" "clef" "thinking"])))
+    (is (false? (get-in b ["thinkers" "tiny" "thinking"])))))
