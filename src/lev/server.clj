@@ -438,7 +438,7 @@
                                         [name (seq/ordered-map [["model" (:model cfg)]
                                                                 ["available" (router/available? rt name)]
                                                                 ["loaded" (contains? loaded-thinkers name)]
-                                                                ["thinking" (boolean (get cfg :thinking true))]])]))]
+                                                                ["thinking" (boolean (and (nil? (:engine cfg)) (get cfg :thinking true)))]])]))]
                          ["models" (seq/ordered-map
                                     (for [[name dir] (:models rt)]
                                       [name (seq/ordered-map [["repo" (get router/repos name)]
