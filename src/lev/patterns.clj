@@ -1,7 +1,8 @@
 (ns lev.patterns
   "Composable decision patterns over system-one (von.patterns, ported):
   a confidence gate, route dispatch, a composite risk score, two-stage
-  routing for wide taxonomies — and escalation, the pattern the
+  routing for wide taxonomies, a choice decided by expected utility
+  (cognitive-hydraulics' ACT-R pick) — and escalation, the pattern the
   authored144 comparison (bench/) argues for: answer with the fast
   encoder, and re-ask only the questions it is unsure about on a thinker
   (lev.think), seconds a question but right where the encoder is not.
@@ -135,6 +136,48 @@
     (seq/ordered-map [["score" (if (and normalize (pos? wsum)) (/ total wsum) total)]
                       ["breakdown" (seq/ordered-map rows)]
                       ["response" resp]])))
+
+(defn- option-numbers
+  "{option number} for every option from a number (all of them), a map
+  {option number} (a missing option gets `default`) or nil (`default`).
+  Throws {:type :invalid-request} naming `field` on anything else."
+  [x options default field]
+  (let [bad (fn [msg] (throw (ex-info (str field " " msg) {:type :invalid-request :field field})))
+        option-set (set options)]
+    (cond
+      (nil? x) (zipmap options (repeat (double default)))
+      (number? x) (zipmap options (repeat (double x)))
+      (map? x) (do (doseq [[k v] x]
+                     (when-not (contains? option-set (key-str k)) (bad (str "names an unknown option " (pr-str k))))
+                     (when-not (number? v) (bad (str "must be numbers; got " (pr-str v) " for " (pr-str k)))))
+                   (let [x (into {} (map (fn [[k v]] [(key-str k) (double v)])) x)]
+                     (into {} (map (fn [o] [o (get x o (double default))])) options)))
+      :else (bad (str "must be a number or {option: number}; got " (pr-str x))))))
+
+(defn utility-choice
+  "One choice decided by expected utility rather than probability, the
+  ACT-R pick cognitive-hydraulics makes: U = p * value - cost per option,
+  the highest wins, a tie (at four decimals) to the earlier option.
+  :value is a number for every option or {option value} (1 when left
+  out), :costs {option cost} (0 when left out). The answer's calibrated
+  probabilities and its own \"choice\" are not touched. Answers
+  {\"choice\" \"utility\" \"utilities\" \"answer\"}; other opts go to
+  lev.api/system-one."
+  [agent state question {:keys [value costs] :as opts}]
+  (when-not (= "choice" (get question "type" (get question :type)))
+    (throw (ex-info "utility-choice takes a choice question" {:type :invalid-request :field "question"})))
+  (let [options (map key-str (keys (:crit (ag/to-internal (ag/validate-question "utility_question" question)))))
+        values (option-numbers value options 1.0 "value")
+        costs (option-numbers costs options 0.0 "costs")
+        answer (get-in (api/system-one agent state {"utility_question" question} (dissoc opts :value :costs))
+                       ["answers" "utility_question"])
+        probs (get answer "probabilities")
+        us (mapv (fn [o] [o (ag/round4 (- (* (double (get probs o 0.0)) (get values o)) (get costs o)))]) options)
+        [best u] (reduce (fn [[_ bu :as b] [_ u :as c]] (if (> u bu) c b)) us)]
+    (seq/ordered-map [["choice" best]
+                      ["utility" u]
+                      ["utilities" (seq/ordered-map us)]
+                      ["answer" answer]])))
 
 (defn two-stage-choice
   "A wide taxonomy ({category {option description}}) in two choices: the

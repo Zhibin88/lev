@@ -468,6 +468,20 @@
         (is (= 200 st) (pr-str b))
         (is (= ["category" "category_confidence" "choice" "choice_confidence" "combined_confidence"] (keys b)))
         (is (contains? #{"cloud" "database"} (get b "category"))))
+      (let [utility (fn [extra] (post "/v1/patterns/utility-choice"
+                                      (merge {"state" (get base "state")
+                                              "question" (get-in base ["questions" "department"])}
+                                             extra)))
+            [st b] (utility {"value" 10 "costs" {"billing" 100}})]
+        (is (= 200 st) (pr-str b))
+        (is (= ["choice" "utility" "utilities" "answer"] (keys b)))
+        (is (= "billing" (get-in b ["answer" "choice"])) "the encoder's own pick")
+        (is (not= "billing" (get b "choice")) "priced out")
+        (is (> -90.0 (get-in b ["utilities" "billing"])))
+        (is (= ["body" "costs"] (get-in (second (utility {"costs" {"nope" 1}})) ["detail" 0 "loc"])))
+        (is (= ["body" "value"] (get-in (second (utility {"value" "x"})) ["detail" 0 "loc"])))
+        (is (= ["body" "question"] (get-in (second (utility {"question" {"type" "noul" "instructions" "x?"}})) ["detail" 0 "loc"])))
+        (is (= ["body" "question"] (get-in (second (post "/v1/patterns/utility-choice" {"state" "s"})) ["detail" 0 "loc"]))))
       (testing "their validation"
         (is (= 422 (first (post "/v1/patterns/two-stage-choice" {"state" "s"}))))
         (is (= 422 (first (post "/v1/patterns/composite-score" (assoc base "weights" [1 2])))))

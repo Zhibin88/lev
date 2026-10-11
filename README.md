@@ -661,6 +661,8 @@ POST /v1/systemone {"state": ..., "questions": {...}, "escalate": {"model": "qwe
 POST /v1/patterns/confidence-gate   systemone body + "threshold"          -> {"automatic": {...}, "escalate": {...}, "response": {...}}
 POST /v1/patterns/composite-score   systemone body + "weights" {id: w}    -> {"score": 0..1, "breakdown": {...}, "response": {...}}
 POST /v1/patterns/two-stage-choice  {"state", "taxonomy": {category: {option: description}}} -> {"category", "choice", "combined_confidence", ...}
+POST /v1/patterns/utility-choice    {"state", "question": a choice, "value": G or {option: G}, "costs": {option: C}}
+                                    -> {"choice", "utility", "utilities": {option: p*G - C}, "answer": the choice answer}
 ```
 
 On authored144, escalating the `english` encoder's answers to Qwen3.5-4B
@@ -769,6 +771,7 @@ The one-question conveniences and the patterns, as a library (`lev.api`,
 (pat/route rt event (api/choice "Dispute action?" {"refund" "" "escalate" ""}) {"refund" process-refund "escalate" notify-fraud} {})
 (pat/composite-score rt telemetry questions {:weights {"severity" 2.0 "is_threat" 3.0}})   ; {"score" 0.91 ...}
 (pat/two-stage-choice rt "Postgres replica lag" {"cloud" {"aws" "..." "gcp" "..."} "database" {"postgres" "..." "redis" "..."}} {})
+(pat/utility-choice rt incident (api/choice "Remedy?" ["restart" "rollback" "page-human"]) {:value 10 :costs {"page-human" 4}})
 ```
 
 ### As a binary

@@ -26,6 +26,10 @@
     POST /v1/patterns/two-stage-choice  {\"state\", \"taxonomy\" {category {option description}},
                                          \"instructions_category\"? \"instructions_option\"?, \"model\"? ...}
                                         -> {\"category\" .. \"choice\" .. \"combined_confidence\"}
+    POST /v1/patterns/utility-choice    {\"state\", \"question\" (a choice), \"value\"? number or {option: number},
+                                         \"costs\"? {option: number}, \"model\"? ...}
+                                        -> {\"choice\" .. \"utility\" .. \"utilities\" {..} \"answer\" {..}}:
+                                        the option maximising p * value - cost
     POST /v1/workflows/:name  {\"input\" ..., \"options\"? {...},
                                \"constraints\"? [...], \"on_infeasible\"?,
                                \"model\"? \"lang\"? \"task\"?}
@@ -380,8 +384,8 @@
                 (json-response 200 (assoc result "workflow" name "state" state))))))))))
 
 (defn pattern
-  "POST /v1/patterns/:name: confidence-gate, composite-score and
-  two-stage-choice over a systemone body (state + questions, or state +
+  "POST /v1/patterns/:name: confidence-gate, composite-score,
+  two-stage-choice and utility-choice over a systemone body (state + questions, or state +
   taxonomy), routed like one."
   [rt lock name body]
   (let [opts (fn [& ks] (into {} (keep (fn [[k key]] (when (contains? body k) [key (get body k)]))
@@ -418,6 +422,30 @@
            #(pat/two-stage-choice rt (get body "state") (get body "taxonomy")
                                   (merge (routing) (opts "instructions_category" :instructions-category
                                                          "instructions_option" :instructions-option))))
+      "utility-choice"
+      (let [q (get body "question")
+            question-details (cond
+                               (not (map? q))
+                               [(detail ["body" "question"] "question is required: one choice question" "value_error")]
+                               (not= "choice" (get q "type"))
+                               [(detail ["body" "question"] "utility-choice takes a choice question" "value_error")]
+                               :else
+                               (try (ag/validate-question "question" q) nil
+                                    (catch Exception e [(detail ["body" "question"] (ex-message e) "value_error")])))]
+        (if-not (map? body)
+          (unprocessable [(detail ["body"] "request body must be a JSON object" "type_error")])
+          (let [details (concat (check-state body) (check-routing-fields rt body) question-details)]
+            (if (seq details)
+              (unprocessable details)
+              ;; value / costs are checked against the question's options by
+              ;; the pattern itself, before anything runs
+              (try (json-response 200 (locking lock
+                                        (pat/utility-choice rt (get body "state") q
+                                                            (merge (routing) (opts "value" :value "costs" :costs)))))
+                   (catch clojure.lang.ExceptionInfo e
+                     (if (= :invalid-request (:type (ex-data e)))
+                       (unprocessable [(detail ["body" (:field (ex-data e))] (ex-message e) "value_error")])
+                       (throw e))))))))
       not-found)))
 
 (defn- health [rt workflows]
