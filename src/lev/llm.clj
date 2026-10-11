@@ -142,8 +142,8 @@
     (ffi/with-arena [a]
       (let [out (ffi/alloc a cap)
             n (generate* (:p m) (ffi/string->ptr a prompt) (int max-tokens) (ffi/string->ptr a (or stop ""))
-                         (float (or temperature (:temperature opts))) (float (or top-p (:top-p opts)))
-                         (float (or min-p (:min-p opts))) (long (or seed (:seed opts))) out (int cap))]
+                         (double (or temperature (:temperature opts))) (double (or top-p (:top-p opts)))
+                         (double (or min-p (:min-p opts))) (long (or seed (:seed opts))) out (int cap))]
         (when (neg? n)
           (throw (ex-info (str "generation failed: " (error* (:p m))) {:type :llm-error})))
         {:text (ffi/ptr->string out) :tokens n}))))
@@ -169,8 +169,8 @@
                           (ffi/string->ptr a (or answer-prefix (:answer-prefix opts)))
                           optv (int n)
                           (ffi/string->ptr a (or answer-end (:answer-end opts)))
-                          (float (or temperature (:temperature opts))) (float (or top-p (:top-p opts)))
-                          (float (or min-p (:min-p opts))) (long (or seed (:seed opts)))
+                          (double (or temperature (:temperature opts))) (double (or top-p (:top-p opts)))
+                          (double (or min-p (:min-p opts))) (long (or seed (:seed opts)))
                           logp thought (int think-cap))]
         (when (neg? made)
           (throw (ex-info (str "decide failed: " (error* (:p m))) {:type :llm-error})))

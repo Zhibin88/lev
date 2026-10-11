@@ -71,7 +71,7 @@
                 (ffi/write sliding :int32 (int (if (= t "sliding_attention") 1 0)) (* 4 i)))
               (new* (int hidden-size) (int num-layers) (int num-heads) (int head-dim) (int intermediate)
                     (int window) (int head-layers) (int vocab-size)
-                    (float rope-full) (float rope-local) (float norm-eps)
+                    (double rope-full) (double rope-local) (double norm-eps)
                     sliding (int (if (= dtype :f16) 1 0)))))]
     (when (zero? (ffi/address h)) (fail h data-dir "out of memory"))
     (when (zero? (ok* h)) (fail h data-dir (error* h)))

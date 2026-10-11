@@ -133,7 +133,7 @@
         scale (/ 1.0 (Math/sqrt hd))]
     (dotimes [h heads]
       (let [off (* 4 h hd)]
-        (t/cblas-sgemm* 101 111 112 nq nk hd (float scale)
+        (t/cblas-sgemm* 101 111 112 nq nk hd (double scale)
                         (offset (t/ptr q) off) width (offset (t/ptr k) off) width
                         0.0 (t/ptr scores) nk)
         (let [p (t/softmax scores nk)]
@@ -230,7 +230,7 @@
                       anchor (t/add-scaled (t/rows qv qi 1) gv 1.0)
                       out (t/make [1 k])]
                   (clef-logits* (t/ptr field) (t/ptr opts) k width (t/ptr (t/rows lex s k)) (t/ptr anchor) D
-                                (t/ptr residual) (float prior-scale) (float joint-scale) (float gate) (t/ptr out))
+                                (t/ptr residual) (double prior-scale) (double joint-scale) (double gate) (t/ptr out))
                   (t/to-floats out)))
               (range nq))))))
 

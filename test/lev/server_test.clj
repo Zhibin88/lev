@@ -485,3 +485,11 @@
     (let [[st b] (post (assoc base "debias" "yes"))]
       (is (= 422 st))
       (is (= ["body" "debias"] (get-in b ["detail" 0 "loc"]))))))
+
+(deftest an-engine-thinker-is-listed-as-not-thinking
+  ;; Clef and TinyDecide generate nothing: there is no thought to switch on
+  (let [rt (router/make-router {:thinkers {"clef" {:engine "clef" :model "target/no-such.gguf" :head "target/nope"}
+                                           "tiny" {:engine "tinydecide" :model "target/nope"}}})
+        [_ b] (call (srv/handler rt {}) (req :get "/v1/models"))]
+    (is (false? (get-in b ["thinkers" "clef" "thinking"])))
+    (is (false? (get-in b ["thinkers" "tiny" "thinking"])))))
