@@ -106,9 +106,11 @@
   [p i]
   (ffi/read p :float (* 4 i)))
 
+;; every :float argument here is passed as a double: (float x) is a boxed
+;; Float, which jolt 0.8.20's FFI refuses
 (defn set*
   [p i v]
-  (ffi/write p :float (float v) (* 4 i)))
+  (ffi/write p :float (double v) (* 4 i)))
 
 (defn from-floats
   [xs]
@@ -209,7 +211,7 @@
   ([out x w b eps]
    (let [[n d] (:shape x)
          bp (if (map? b) (long (:p b)) 0)]
-     (layernorm* (:p x) (:p w) bp (long n) (long d) (float eps) (:p out))
+     (layernorm* (:p x) (:p w) bp (long n) (long d) (double eps) (:p out))
      out)))
 
 (defn layernorm
@@ -320,7 +322,7 @@
   full-attention-block rows."
   [ctx qh kh vh allowed H L hd scale window]
   (attention* @sgemm-address (:p qh) (:p kh) (:p vh) (:p allowed)
-              (long H) (long L) (long hd) (float scale) (long window) (long full-attention-block)
+              (long H) (long L) (long hd) (double scale) (long window) (long full-attention-block)
               (:p ctx))
   ctx)
 
@@ -349,7 +351,7 @@
   [out a b alpha]
   (let [n (long (first (:shape a)))
         d (long (if (second (:shape a)) (second (:shape a)) 1))]
-    (add-scaled* (:p a) (:p b) n d (float alpha) (:p out))
+    (add-scaled* (:p a) (:p b) n d (double alpha) (:p out))
     out))
 
 (defn add-scaled
