@@ -596,3 +596,28 @@ Small, every interval above 1, and it costs nothing: on by default on
 both backends (`:selected-head false` in the prepared config or, for
 lev.mlx, the loader's limits keeps the whole layer; `bench/paired.clj
 --candidates fullhead,cpu` / `mlxfull,mlx` is the comparison).
+
+## State embeddings (`/v1/embed`, 2026-10-10)
+
+`lev.agent/embed` answers a state as one unit vector from the english
+encoder, for callers that need state similarity (cognitive-hydraulics'
+chunk recall). The encoder was trained for the decision head, not for
+similarity, so the pooling was chosen on a small check
+(`bench/embeddings.clj`): 12 short states in 4 groups (memory leak, bad
+config, capacity, billing), three phrasings each.
+
+| pooling of the final-norm states | same-group cosine | other-group cosine | nearest neighbour in its group |
+|---|---|---|---|
+| mean over [CLS] state [SEP] | 0.904 | 0.874 | 8 / 12 |
+| mean, centered on the set | 0.116 | -0.133 | 8 / 12 |
+| CLS | 0.904 | 0.884 | 6 / 12 |
+| CLS, centered | 0.080 | -0.122 | 8 / 12 |
+| mean without [CLS] / [SEP] | 0.892 | 0.860 | 7 / 12 |
+| the same, centered | 0.103 | -0.130 | 8 / 12 |
+
+Mean pooling, raw, ships: centering widens the scale but does not move
+the nearest neighbour here and needs a corpus mean. The signal is real
+(8/12 against ~2/11 by chance) and modest, and the raw vectors are
+anisotropic: any two states sit between ~0.82 and ~0.95. Rank by cosine;
+a fixed similarity cutoff is not portable between domains. Nothing here
+touches an answer's numbers.

@@ -345,6 +345,28 @@
               (recur (inc b) (+ at k)
                      (conj out [lgv (t/to-floats (act-head w pooled feats))])))))))))
 
+(defn embed-batch
+  "B token rows ([ids ...], each [CLS] ... [SEP]) through the encoder
+  alone: each row's final-norm hidden states averaged over its own tokens
+  and L2-normalised, so a dot product of two is their cosine. Rows are
+  padded and masked as in forward-batch. Answers [d] float vectors in row
+  order."
+  [w cfg id-rows]
+  (with-open [arena (ffi/confined-arena)]
+    (binding [t/*arena* arena]
+      (let [B (count id-rows)
+            L (reduce max (map count id-rows))
+            pad (or (:pad-id cfg) 0)
+            ws (workspace cfg B L)
+            ids (t/from-ints (mapcat #(into (vec %) (repeat (- L (count %)) pad)) id-rows))
+            att (t/from-bytes (mapcat #(into (vec (repeat (count %) 1)) (repeat (- L (count %)) 0)) id-rows) [B L])
+            h (encode-batch w cfg ids att (row-masks cfg att B L) ws)]
+        (mapv (fn [b row]
+                (let [v (t/to-floats (t/mean-rows (t/rows h (* b L) (count row))))
+                      norm (Math/sqrt (reduce + 0.0 (map #(* % %) v)))]
+                  (mapv #(/ % (max norm 1e-12)) v)))
+              (range) id-rows)))))
+
 (defn forward-row
   "One row through encoder + decision head: forward-batch of a batch of one.
   ids-row/att-row are [L] seqs; marker-pos/marker-mask are [kmax] seqs.

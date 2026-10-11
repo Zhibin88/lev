@@ -21,6 +21,11 @@
    :float :pointer :int64 :pointer :int64
    :float :pointer :int64] :void)
 
+(ffi/defcfn cblas-sgemv* "cblas_sgemv"
+  [:int :int :int64 :int64
+   :float :pointer :int64 :pointer :int64
+   :float :pointer :int64] :void)
+
 (def ^:private RowMajor 101)
 (def ^:private NoTrans 111)
 (def ^:private Trans 112)
@@ -181,6 +186,19 @@
                   1.0 (:p X) (long k)
                   (:p W) (long k)
                   0.0 (:p out) (long n))
+    out))
+
+(defn mean-rows
+  "The mean of the rows of t [n x d] as a [d] tensor: ones/n @ t, one
+  sgemv."
+  [t]
+  (let [[n d] (:shape t)
+        ones (from-floats (repeat n 1.0))
+        out (make [d])]
+    (cblas-sgemv* RowMajor Trans (long n) (long d)
+                  (/ 1.0 (double n)) (:p t) (long d)
+                  (:p ones) 1
+                  0.0 (:p out) 1)
     out))
 
 (defn mmul

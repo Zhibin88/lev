@@ -19,6 +19,10 @@
                               state, in order]}; a thinker with thinking off
                               decides them all in one pass (Jev mode), the
                               encoders route and answer each; no escalate
+    POST /v1/embed            {\"state\"} or {\"states\" [...]}, \"model\"? \"lang\"? -> {\"model\"
+                              \"embeddings\" [[unit vector] ...] \"dimensions\" \"usage\"
+                              \"routing\"}: the encoder's mean-pooled final states
+                              (lev.agent/embed; bench/README.md, embeddings)
     POST /v1/route            same body, questions optional -> the routing
                               decision alone, nothing loaded or run
     POST /v1/patterns/confidence-gate   systemone body + \"threshold\"? -> {\"automatic\" \"escalate\" \"response\"}
@@ -26,6 +30,10 @@
     POST /v1/patterns/two-stage-choice  {\"state\", \"taxonomy\" {category {option description}},
                                          \"instructions_category\"? \"instructions_option\"?, \"model\"? ...}
                                         -> {\"category\" .. \"choice\" .. \"combined_confidence\"}
+    POST /v1/patterns/utility-choice    {\"state\", \"question\" (a choice), \"value\"? number or {option: number},
+                                         \"costs\"? {option: number}, \"model\"? ...}
+                                        -> {\"choice\" .. \"utility\" .. \"utilities\" {..} \"answer\" {..}}:
+                                        the option maximising p * value - cost
     POST /v1/workflows/:name  {\"input\" ..., \"options\"? {...},
                                \"constraints\"? [...], \"on_infeasible\"?,
                                \"model\"? \"lang\"? \"task\"?}
@@ -328,6 +336,32 @@
                                                (throw (ex-info (ex-message e) (assoc (ex-data e) :offset 0)))
                                                (throw e))))})))))
 
+(defn embed
+  "POST /v1/embed: {\"state\"} or {\"states\" [...]} (1-256), routed
+  like /v1/systemone (one model for all of them) -> {\"model\"
+  \"embeddings\" [[...]] \"dimensions\" \"usage\" \"routing\"}, each a unit
+  vector (lev.agent/embed). Encoders only."
+  [rt lock body]
+  (let [details (if-not (map? body)
+                  [(detail ["body"] "request body must be a JSON object" "type_error")]
+                  (vec (concat (cond
+                                 (and (contains? body "state") (contains? body "states"))
+                                 [(detail ["body" "state"] "send state or states, not both" "value_error")]
+                                 (contains? body "states") (check-states body)
+                                 :else (check-state body))
+                               (check-routing-fields rt body)
+                               (let [m (get body "model")]
+                                 (when (and (string? m) (not (engine-names m))
+                                            (try (router/thinker? rt m) (catch Exception _ false)))
+                                   [(detail ["body" "model"] (str m " is a thinker; embeddings need an encoder") "value_error")])))))]
+    (if (seq details)
+      (unprocessable details)
+      (let [{:keys [model lang]} (routing-opts body)
+            states (if (contains? body "states") (get body "states") [(get body "state")])
+            out (locking lock (router/embed rt states :model model :lang lang))]
+        (json-response 200 (update out "embeddings"
+                                   (fn [es] (mapv (fn [e] (mapv #(/ (Math/round (* 1e6 (double %))) 1e6) e)) es))))))))
+
 (defn route-only
   "POST /v1/route: the decision for a body, without loading or running."
   [rt body]
@@ -380,8 +414,8 @@
                 (json-response 200 (assoc result "workflow" name "state" state))))))))))
 
 (defn pattern
-  "POST /v1/patterns/:name: confidence-gate, composite-score and
-  two-stage-choice over a systemone body (state + questions, or state +
+  "POST /v1/patterns/:name: confidence-gate, composite-score,
+  two-stage-choice and utility-choice over a systemone body (state + questions, or state +
   taxonomy), routed like one."
   [rt lock name body]
   (let [opts (fn [& ks] (into {} (keep (fn [[k key]] (when (contains? body k) [key (get body k)]))
@@ -418,6 +452,30 @@
            #(pat/two-stage-choice rt (get body "state") (get body "taxonomy")
                                   (merge (routing) (opts "instructions_category" :instructions-category
                                                          "instructions_option" :instructions-option))))
+      "utility-choice"
+      (let [q (get body "question")
+            question-details (cond
+                               (not (map? q))
+                               [(detail ["body" "question"] "question is required: one choice question" "value_error")]
+                               (not= "choice" (get q "type"))
+                               [(detail ["body" "question"] "utility-choice takes a choice question" "value_error")]
+                               :else
+                               (try (ag/validate-question "question" q) nil
+                                    (catch Exception e [(detail ["body" "question"] (ex-message e) "value_error")])))]
+        (if-not (map? body)
+          (unprocessable [(detail ["body"] "request body must be a JSON object" "type_error")])
+          (let [details (concat (check-state body) (check-routing-fields rt body) question-details)]
+            (if (seq details)
+              (unprocessable details)
+              ;; value / costs are checked against the question's options by
+              ;; the pattern itself, before anything runs
+              (try (json-response 200 (locking lock
+                                        (pat/utility-choice rt (get body "state") q
+                                                            (merge (routing) (opts "value" :value "costs" :costs)))))
+                   (catch clojure.lang.ExceptionInfo e
+                     (if (= :invalid-request (:type (ex-data e)))
+                       (unprocessable [(detail ["body" (:field (ex-data e))] (ex-message e) "value_error")])
+                       (throw e))))))))
       not-found)))
 
 (defn- health [rt workflows]
@@ -482,6 +540,8 @@
                :response (guard (json-in #(systemone rt lock %) false))}
               {:path "/v1/systemone/batch" :method :post
                :response (guard (json-in #(systemone-batch rt lock %) false))}
+              {:path "/v1/embed" :method :post
+               :response (guard (json-in #(embed rt lock %) false))}
               {:path "/v1/route" :method :post
                :response (guard (json-in #(route-only rt %) false))}
               {:path "/v1/models" :method :get :response (guard (fn [_] (models rt)))}

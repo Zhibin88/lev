@@ -388,6 +388,24 @@
                             (some? debias) (assoc :debias debias)))
            "routing" d)))
 
+(defn embed
+  "Route the states (together: one model embeds them all, so the vectors
+  are comparable) and embed them on an encoder (lev.agent/embed):
+  {model embeddings dimensions usage routing}. A thinker cannot embed:
+  {:type :invalid-request}."
+  [router states & {:keys [model lang]}]
+  (let [d (resolve-decision router (route router (vec states) nil :model model :lang lang) (some? model))]
+    (when (thinker? router (get d "model"))
+      (throw (ex-info (str "embeddings need an encoder; " (get d "model") " is a thinker")
+                      {:type :invalid-request :field "model"})))
+    (let [agent (load-model router (get d "model"))
+          {:keys [embeddings tokens]} (ag/embed-report agent states)]
+      (seq/ordered-map [["model" (:name agent)]
+                        ["embeddings" embeddings]
+                        ["dimensions" (count (first embeddings))]
+                        ["usage" (array-map "input_tokens" (reduce + 0 tokens))]
+                        ["routing" d]]))))
+
 (defn predict-batch
   "`predict` for several states against the same questions, a vector in
   order. A thinker (named: thinkers are never content-routed) gets them

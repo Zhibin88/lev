@@ -50,9 +50,10 @@
 
 (def fast (canned-agent "fast" {"intent" [0.5 0.3 0.2] "is_urgent" [0.45 0.55] "frustration" [0.1 0.8 0.1]
                                 "What?" [0.5 0.3 0.2] "Which option best describes the state?" [0.5 0.3 0.2]
-                                "Time pressure?" [0.45 0.55] "How angry?" [0.1 0.8 0.1]}))
+                                "Time pressure?" [0.45 0.55] "How angry?" [0.1 0.8 0.1]
+                                "What does the customer want?" [0.5 0.3 0.2]}))
 (def slow (canned-agent "slow" {"intent" [0.05 0.9 0.05] "is_urgent" [0.02 0.98] "frustration" [0.9 0.05 0.05]
-                                "What?" [0.05 0.9 0.05]}))
+                                "What?" [0.05 0.9 0.05] "What does the customer want?" [0.05 0.9 0.05]}))
 
 (defn- rt []
   (router/make-router {:loader (fn [name & _] (if (= name "english") fast (throw (ex-info "no" {}))))
@@ -186,3 +187,37 @@
   (testing "a bad type or value is refused"
     (is (thrown-with-msg? Exception #"threshold" (pat/confidence-gate fast "s" questions {:threshold {"noul" 2}})))
     (is (thrown-with-msg? Exception #"threshold" (pat/confidence-gate fast "s" questions {:threshold {"bool" 0.5}})))))
+
+(deftest utility-choice-decides-by-expected-utility
+  ;; cognitive-hydraulics' ACT-R pick, U = p*G - C, over one choice: the
+  ;; calibrated probabilities stay as they are, the decision moves
+  (let [q (api/choice "What does the customer want?" (array-map "refund" "money back" "help" "a question" "other" nil))]
+    (testing "without values or costs it is the most probable option"
+      (let [out (pat/utility-choice fast "s" q {})]
+        (is (= "refund" (get out "choice")))
+        (is (= ["choice" "utility" "utilities" "answer"] (keys out)))
+        (is (= {"refund" 0.5 "help" 0.3 "other" 0.2} (get out "utilities")))
+        (is (= 0.5 (get-in out ["answer" "probabilities" "refund"])) "the answer is untouched")))
+    (testing "a cost can outweigh a lead in probability"
+      ;; refund 0.5*10 - 3 = 2, help 0.3*10 - 0 = 3, other 0.2*10 - 0 = 2
+      (let [out (pat/utility-choice fast "s" q {:value 10 :costs {"refund" 3}})]
+        (is (= "help" (get out "choice")))
+        (is (= 3.0 (get out "utility")))
+        (is (= {"refund" 2.0 "help" 3.0 "other" 2.0} (get out "utilities")))
+        (is (= "refund" (get-in out ["answer" "choice"])) "the answer keeps the model's own pick")))
+    (testing "values per option; an option left out is worth the default 1"
+      (is (= "other" (get (pat/utility-choice fast "s" q {:value {"other" 5}}) "choice"))))
+    (testing "a tie goes to the earlier option"
+      (is (= "refund" (get (pat/utility-choice fast "s" q {:costs {"refund" 0.2}}) "choice"))))
+    (testing "through a router"
+      (is (= "help" (get (pat/utility-choice (rt) "s" q {:model "slow"}) "choice"))))
+    (testing "bad input is an invalid request"
+      (doseq [[opts why] [[{:costs {"nope" 1}} "unknown option"]
+                          [{:costs {"refund" "x"}} "not a number"]
+                          [{:value "x"} "value not a number or map"]]]
+        (is (= :invalid-request (try (pat/utility-choice fast "s" q opts) nil
+                                     (catch Exception e (:type (ex-data e)))))
+            why))
+      (is (= :invalid-request (try (pat/utility-choice fast "s" (api/noul "x?") {}) nil
+                                   (catch Exception e (:type (ex-data e)))))
+          "a choice question only"))))
