@@ -499,3 +499,28 @@
     (let [[st b] (post (assoc base "debias" "yes"))]
       (is (= 422 st))
       (is (= ["body" "debias"] (get-in b ["detail" 0 "loc"]))))))
+
+(deftest embeddings-on-the-wire
+  (let [rt (router/preloaded @agent "english" {:thinkers {"slow" {:model "target/no-such.gguf"}}
+                                               :thinker-loader (fn [n _] {:kind :thinker :name n})})
+        h (srv/handler rt {:workflows @workflows})
+        post (fn [body] (call h (req :post "/v1/embed" :body (seq/json-str body))))
+        loc (fn [b] (get-in b ["detail" 0 "loc"]))]
+    (testing "one state, or several"
+      (let [[st b] (post {"state" {"service" "payments" "signal" "OOM kills"}})]
+        (is (= 200 st) (pr-str b))
+        (is (= ["model" "embeddings" "dimensions" "usage" "routing"] (keys b)))
+        (is (= "english" (get b "model")))
+        (is (= 1 (count (get b "embeddings"))))
+        (is (= (get b "dimensions") (count (first (get b "embeddings")))))
+        (is (< (Math/abs (- 1.0 (Math/sqrt (reduce + (map #(* % %) (first (get b "embeddings"))))))) 1e-4)))
+      (let [[st b] (post {"states" ["heap climbing" "refund my invoice" "CPU saturated"]})]
+        (is (= 200 st))
+        (is (= 3 (count (get b "embeddings"))))))
+    (testing "validation"
+      (is (= ["body" "state"] (loc (second (post {})))))
+      (is (= ["body" "state"] (loc (second (post {"state" "a" "states" ["b"]})))) "one or the other")
+      (is (= ["body" "states"] (loc (second (post {"states" []})))))
+      (is (= ["body" "model"] (loc (second (post {"state" "a" "model" "slow"})))) "a thinker cannot embed")
+      (is (= ["body" "model"] (loc (second (post {"state" "a" "model" "nope"})))))
+      (is (= 405 (first (call h (req :get "/v1/embed"))))))))

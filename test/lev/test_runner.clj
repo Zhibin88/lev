@@ -22,6 +22,7 @@
     lev.run-test
     lev.prepare-test
     lev.agent-test
+    lev.embed-test
     lev.server-test
     lev.checkpoints-test])
 

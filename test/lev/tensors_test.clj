@@ -556,3 +556,8 @@
         (is (close act-b (second (nth full 1)) 1e-4))
         (is (close (first (second swapped)) (first (nth full 0)) 1e-4))
         (is (close (first (first swapped)) (first (nth full 1)) 1e-4))))))
+
+(deftest mean-rows-averages-the-rows
+  (let [x (assoc (t/from-floats [1 2 3, 3 4 5]) :shape [2 3])]
+    (is (tu/approx= 1e-6 [2.0 3.0 4.0] (t/to-floats (t/mean-rows x))))
+    (is (tu/approx= 1e-6 [3.0 4.0 5.0] (t/to-floats (t/mean-rows (t/rows x 1 1)))) "on a view")))

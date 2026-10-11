@@ -347,6 +347,35 @@
                   (assoc :k k :logits (vec (take k logits)) :act (vec act) :tokens (count ids)))))
           prepared outputs)))
 
+(defn embed-report
+  "`embed` with the token count of every state: {:embeddings [[d] ...]
+  :tokens [n ...] :dropped [n ...]} (dropped: state tokens past max-len)."
+  [agent states]
+  (when-not (and (= :encoder (:kind agent)) (= :cpu (:backend agent :cpu)))
+    (throw (ex-info (str "embeddings come from an encoder on the C kernels; " (:name agent) " is not one")
+                    {:type :invalid-request :field "model"})))
+  (let [{:keys [cfg tok w]} agent
+        sp (:specials tok)
+        room (- (:max-len cfg) 2)
+        rows (mapv (fn [state]
+                     (let [ids (seq/encode-state tok state)]
+                       {:ids (into [(:cls sp)] (conj (vec (take room ids)) (:sep sp)))
+                        :dropped (max 0 (- (count ids) room))}))
+                   states)]
+    {:embeddings (vec (mapcat #(m/embed-batch w cfg (mapv :ids %)) (partition-all max-batch rows)))
+     :tokens (mapv (comp count :ids) rows)
+     :dropped (mapv :dropped rows)}))
+
+(defn embed
+  "Each state as a unit vector: the encoder's final-norm hidden states
+  over [CLS] state [SEP] (tokenized as system-one reads a state, cut at
+  max-len), mean-pooled and L2-normalised, so the dot product of two is
+  their cosine. Only comparable between states embedded by the same
+  model. Throws {:type :invalid-request} for a thinker or a non-cpu
+  backend."
+  [agent states]
+  (:embeddings (embed-report agent states)))
+
 (defmulti forward
   "Any agent on state + questions, before calibration: one map per
   question, in order, with at least {:qid :qdef :q :qtype :k :logits (the

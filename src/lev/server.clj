@@ -19,6 +19,10 @@
                               state, in order]}; a thinker with thinking off
                               decides them all in one pass (Jev mode), the
                               encoders route and answer each; no escalate
+    POST /v1/embed            {\"state\"} or {\"states\" [...]}, \"model\"? \"lang\"? -> {\"model\"
+                              \"embeddings\" [[unit vector] ...] \"dimensions\" \"usage\"
+                              \"routing\"}: the encoder's mean-pooled final states
+                              (lev.agent/embed; bench/README.md, embeddings)
     POST /v1/route            same body, questions optional -> the routing
                               decision alone, nothing loaded or run
     POST /v1/patterns/confidence-gate   systemone body + \"threshold\"? -> {\"automatic\" \"escalate\" \"response\"}
@@ -332,6 +336,32 @@
                                                (throw (ex-info (ex-message e) (assoc (ex-data e) :offset 0)))
                                                (throw e))))})))))
 
+(defn embed
+  "POST /v1/embed: {\"state\"} or {\"states\" [...]} (1-256), routed
+  like /v1/systemone (one model for all of them) -> {\"model\"
+  \"embeddings\" [[...]] \"dimensions\" \"usage\" \"routing\"}, each a unit
+  vector (lev.agent/embed). Encoders only."
+  [rt lock body]
+  (let [details (if-not (map? body)
+                  [(detail ["body"] "request body must be a JSON object" "type_error")]
+                  (vec (concat (cond
+                                 (and (contains? body "state") (contains? body "states"))
+                                 [(detail ["body" "state"] "send state or states, not both" "value_error")]
+                                 (contains? body "states") (check-states body)
+                                 :else (check-state body))
+                               (check-routing-fields rt body)
+                               (let [m (get body "model")]
+                                 (when (and (string? m) (not (engine-names m))
+                                            (try (router/thinker? rt m) (catch Exception _ false)))
+                                   [(detail ["body" "model"] (str m " is a thinker; embeddings need an encoder") "value_error")])))))]
+    (if (seq details)
+      (unprocessable details)
+      (let [{:keys [model lang]} (routing-opts body)
+            states (if (contains? body "states") (get body "states") [(get body "state")])
+            out (locking lock (router/embed rt states :model model :lang lang))]
+        (json-response 200 (update out "embeddings"
+                                   (fn [es] (mapv (fn [e] (mapv #(/ (Math/round (* 1e6 (double %))) 1e6) e)) es))))))))
+
 (defn route-only
   "POST /v1/route: the decision for a body, without loading or running."
   [rt body]
@@ -510,6 +540,8 @@
                :response (guard (json-in #(systemone rt lock %) false))}
               {:path "/v1/systemone/batch" :method :post
                :response (guard (json-in #(systemone-batch rt lock %) false))}
+              {:path "/v1/embed" :method :post
+               :response (guard (json-in #(embed rt lock %) false))}
               {:path "/v1/route" :method :post
                :response (guard (json-in #(route-only rt %) false))}
               {:path "/v1/models" :method :get :response (guard (fn [_] (models rt)))}

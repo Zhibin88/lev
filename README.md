@@ -624,6 +624,9 @@ POST /v1/systemone        Authorization: Bearer <key>   (only if a key is config
 POST /v1/systemone/batch  the same body with "states": [1-256 states] instead of "state", no "escalate"
                           -> {"results": [what /v1/systemone answers for each state, in order]}
 POST /v1/route            same body, questions optional -> the routing decision alone (nothing loaded or run)
+POST /v1/embed            {"state"} or {"states": [1-256]}, "model"?/"lang"? -> {"model", "embeddings": [[unit vector] ...],
+                           "dimensions", "usage", "routing"}: an encoder's mean-pooled final states, for state
+                           similarity (rank by cosine; bench/README.md has how good it is)
 POST /v1/workflows/<name> {"input": <anything the workflow's state fn takes>, "options"?: {...}, "constraints"?: [...],
                            "on_infeasible"?: ..., "model"?/"lang"?/"task"?}
                           -> the systemone answer + "workflow" + the built "state"; the request's constraints
