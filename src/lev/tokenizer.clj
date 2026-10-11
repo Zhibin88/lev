@@ -40,20 +40,26 @@
 (deficu unorm2-get-instance* "unorm2_getNFCInstance" [:pointer] :pointer)
 (deficu unorm2-normalize* "unorm2_normalize"
   [:pointer :pointer :int32 :pointer :int32 :pointer] :int32)
+(deficu unorm2-get-nfd-instance* "unorm2_getNFDInstance" [:pointer] :pointer)
+(deficu u-str-to-lower* "u_strToLower"
+  [:pointer :int32 :pointer :int32 :pointer :pointer] :int32)
 (deficu u-char-type* "u_charType" [:int32] :int32)
 ;; White_Space property == regex \\s. NOT u_isspace, which also admits the
 ;; U+001C..U+001F separators that the GPT-2 pattern treats as ordinary chars.
 (deficu u-is-uwhitespace* "u_isUWhiteSpace" [:int32] :int8)
 
-(def nfc-instance
+(defn- normalizer [get-instance what]
   (delay (with-open [a (ffi/confined-arena)]
            (let [err (ffi/alloc a 4)]
              (ffi/write err :int32 0 0)
-             (let [p (unorm2-get-instance* err)
+             (let [p (get-instance err)
                    code (ffi/read err :int32 0)]
                (when (pos? code)
-                 (throw (ex-info "unorm2_getNFCInstance failed" {:code code})))
+                 (throw (ex-info (str what " failed") {:code code})))
                p)))))
+
+(def nfc-instance (normalizer unorm2-get-instance* "unorm2_getNFCInstance"))
+(def nfd-instance (normalizer unorm2-get-nfd-instance* "unorm2_getNFDInstance"))
 
 (def ^:private U_BUFFER_OVERFLOW_ERROR 15)
 
@@ -90,35 +96,63 @@
                     (recur (rest us) (conj out u))))))]
     (apply str (map char cps))))
 
-(defn nfc
-  "NFC-normalize via ICU. ASCII-only input is identity (fast path)."
+(defn- icu-transform
+  "s through an ICU UTF-16 transform (f src n dst cap err) -> length,
+  retried once with the length ICU reports on overflow, so no input fails
+  on buffer size."
+  [s f what]
+  (let [units (utf8->u16 s)
+        n (count units)
+        run (fn [cap]
+              (with-open [a (ffi/confined-arena)]
+                (let [src (ffi/alloc a (* 2 (max n 1)))
+                      dst (ffi/alloc a (* 2 cap))
+                      err (ffi/alloc a 4)]
+                  (dotimes [i n]
+                    (ffi/write src :uint16 (bit-and 0xFFFF (nth units i)) (* 2 i)))
+                  ;; ICU returns early on a pre-set error code
+                  (ffi/write err :int32 0 0)
+                  (let [ret (f a src (int n) dst (int cap) err)
+                        code (ffi/read err :int32 0)]
+                    (cond
+                      (zero? code) (u16->string (mapv #(ffi/read dst :uint16 (* 2 %)) (range ret)))
+                      (= code U_BUFFER_OVERFLOW_ERROR) [:retry ret]
+                      :else (throw (ex-info (str what " failed") {:code code})))))))
+        r (run (+ (* 3 n) 16))]
+    (if (vector? r) (run (inc (second r))) r)))
+
+(defn nfd
+  "NFD-normalize via ICU. ASCII-only input is identity (fast path)."
   [s]
   (if (every? #(< (long %) 128) s)
     s
-    (let [units (utf8->u16 s)
-          n (count units)
-          ;; NFC can grow a string (composition exclusions decompose without
-          ;; recomposing), by at most 3x. Start there; retry on overflow with
-          ;; the length ICU reports, so no input can fail on buffer size.
-          normalize (fn [cap]
-                      (with-open [a (ffi/confined-arena)]
-                        (let [src (ffi/alloc a (* 2 (max n 1)))
-                              dst (ffi/alloc a (* 2 cap))
-                              err (ffi/alloc a 4)]
-                          (dotimes [i n]
-                            (ffi/write src :uint16 (bit-and 0xFFFF (nth units i)) (* 2 i)))
-                          ;; ICU returns early on a pre-set error code
-                          (ffi/write err :int32 0 0)
-                          (let [ret (unorm2-normalize* @nfc-instance src (int n)
-                                                       dst (int cap) err)
-                                code (ffi/read err :int32 0)]
-                            (cond
-                              (zero? code)
-                              (u16->string (mapv #(ffi/read dst :uint16 (* 2 %)) (range ret)))
-                              (= code U_BUFFER_OVERFLOW_ERROR) [:retry ret]
-                              :else (throw (ex-info "unorm2_normalize failed" {:code code})))))))
-          r (normalize (+ (* 3 n) 16))]
-      (if (vector? r) (normalize (inc (second r))) r))))
+    (icu-transform s (fn [_ src n dst cap err] (unorm2-normalize* @nfd-instance src n dst cap err))
+                   "unorm2_normalize")))
+
+(defn lower
+  "Full Unicode lowercase in the root locale (JavaScript's toLowerCase:
+  İ is i + U+0307, never a Turkish dotless i)."
+  [s]
+  (if (every? #(< (long %) 128) s)
+    (str/lower-case s)
+    (icu-transform s (fn [a src n dst cap err] (u-str-to-lower* dst cap src n (ffi/string->ptr a "") err))
+                   "u_strToLower")))
+
+(defn char-type
+  "ICU's UCharCategory of a code point (1 Lu .. 6 Mn, 12 Zs, 15 Cc, 16 Cf,
+  19..23 and 28..29 the punctuation)."
+  [c]
+  (u-char-type* (int c)))
+
+(defn nfc
+  "NFC-normalize via ICU. ASCII-only input is identity (fast path). NFC
+  can grow a string (composition exclusions decompose without
+  recomposing), by at most 3x: icu-transform starts there."
+  [s]
+  (if (every? #(< (long %) 128) s)
+    s
+    (icu-transform s (fn [_ src n dst cap err] (unorm2-normalize* @nfc-instance src n dst cap err))
+                   "unorm2_normalize")))
 
 ;; \\p{L} = UCharType 1..5; \\p{N} = 9..11 (Nd, Nl, No)
 (defn letter? [c] (let [t (u-char-type* (int c))] (and (>= t 1) (<= t 5))))

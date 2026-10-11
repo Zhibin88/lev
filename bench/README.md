@@ -471,6 +471,54 @@ probabilities that can be trusted as shipped. The README's Decision Index
 lead over Jev does not carry over at this scale of test: on
 typed-decisions Clef and Jev's published 0.727 are even.
 
+## TinyDecide on lev's benches (2026-10-10)
+
+[TinyDecide](https://huggingface.co/TheREZOR/TinyDecide) is a 10.4M
+ELECTRA-small (12 layers, width 256, 4-bit weights, 6.2 MB) with typed
+heads. The state and each question are blocks of one sequence. A
+question attends to the state and to itself, so one pass answers every
+question and no answer depends on the others. It reads the first 127
+tokens of the state. In lev it is `lev.tinydecide`, a thinker entry with
+`:engine "tinydecide"` whose `:model` is the release directory. Its
+`full/` is the 13.8M build with the whole ELECTRA vocabulary. It runs on
+the C kernels, needs no llama.cpp, and is held to the release's
+JavaScript reference engine at 1e-4 on both builds. The parity fixtures
+are its conformance suite (`bench/tinydecide_golden.py` ->
+`golden/tinydecide`): 288 tokenizer cases, then token ids, truncation
+and answers for 49 requests. Answers are the release's own calibrated
+probabilities, T 1. M1 Max, CPU.
+
+A choice's options go to it as their descriptions, or as the label when
+an option has none. The 10.4M build, label against description against
+"label: description":
+
+| option text | authored144 (ECE) | perturbations108 | trio | typed-decisions choice (ECE) |
+|---|---|---|---|---|
+| label | 36.8% (0.127) | **44.4%** | 57.5% | 0.225 (0.168) |
+| description | 41.7% (**0.064**) | 39.8% | **58.3%** | **0.257** (**0.060**) |
+| label: description | **44.4%** (0.069) | 34.3% | **58.3%** | 0.238 (0.086) |
+
+The description wins three of the four and calibrates best. It gives
+back 5 of the 108 perturbations.
+
+| | size | authored144 (balanced) | ECE | perturbations108 | trio (AG News / BoolQ / SST-5) | typed-decisions (ECE) | noul true (gold 50.8%) | ms a case (authored144) |
+|---|---|---|---|---|---|---|---|---|
+| TinyDecide | 6.2 MB | 41.7% (40.2%) | 0.064 | 39.8% (43) | 58.3% (70): 87.5 / 52.5 / 35.0 | 0.302 (0.127) | 1.5% | **10** |
+| TinyDecide `full/` | 10 MB | 38.9% (37.8%) | 0.061 | 45.4% (49) | 57.5% (69): 87.5 / 52.5 / 32.5 | 0.293 (0.159) | 0.2% | 11 |
+| encoder `english` | 1.6 GB | **61.1% (64.8%)** | | **67.6% (73)** | **65.8% (79)**: 97.5 / 72.5 / 27.5 | **0.362** (0.175) | 67.8% | 117 |
+
+TinyDecide is the routing model the card describes and no more. On AG
+News, short everyday text with plain topics, it is 87.5% in 11 ms. It
+is at chance where the answer needs inference: authored144 is three-way
+and it scores 42%, and BoolQ is 52.5%. The card puts natural language
+inference near chance too. typed-decisions is below the prior (0.470):
+its states are JSON past the 127 tokens it reads, and it answers false to
+98.5% of the nouls, where the gold says true to half of them. The 13.8M
+build is no better here. A typed-decisions state takes 34 ms for five
+questions. It does not replace an encoder, and it is no escalation
+target. It fits where 6 MB and 10 ms on a CPU matter more than accuracy:
+a pre-filter in front of an encoder, or short messages routed by topic.
+
 ## Measuring a change: `bench/paired.clj`
 
 A sequential before/after (two processes, one after the other) confounds

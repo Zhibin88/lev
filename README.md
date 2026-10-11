@@ -22,6 +22,10 @@ Two kinds of model sit behind Lev API:
   Qwen3.8-27B with a joint schema head instead of generation. It decides
   every question of a call together from one pass over the prompt. It is
   configured like a thinker (see Clef, below).
+- **TinyDecide**: [TheREZOR/TinyDecide](https://huggingface.co/TheREZOR/TinyDecide),
+  a 6 MB 4-bit ELECTRA-small with typed heads, ~10 ms a question on a
+  CPU. It works for routing short messages by topic and is at chance on
+  anything that needs inference (see TinyDecide, below).
 
 A request either names its model, like `"model": "english"` or
 `"model": "qwen3.5-4b"`, or gets routed by content to an encoder. A
@@ -411,6 +415,42 @@ and needs ~30 GB of memory, so the escalation model stays Qwen3.5-4B.
 Clef is the choice for a decision model on its own, where rephrased or
 structured inputs, many questions decided together, or probabilities
 trusted as shipped matter more than speed.
+
+### TinyDecide
+
+[TheREZOR/TinyDecide](https://huggingface.co/TheREZOR/TinyDecide)
+(Apache-2.0) is a 10.4M-parameter ELECTRA-small with 4-bit weights and
+typed heads, 6.2 MB on disk. The state and every question go through
+one encoder pass. Each question sees the state and itself, never the
+other questions. `lev.tinydecide` runs it on the encoders' C kernels, so
+it needs no llama.cpp. Download the release and add it as a thinker with
+`:engine "tinydecide"`. `:model` is the release directory, or its
+`full/` for the 13.8M build:
+
+```
+hf download TheREZOR/TinyDecide meta.json model.bin --local-dir ~/models/TinyDecide
+```
+
+```clojure
+{:thinkers {"tinydecide" {:engine "tinydecide" :model "/Users/me/models/TinyDecide"}}}
+```
+
+A request names it like any model (`"model": "tinydecide"`), and
+`:calibration` works as it does for a thinker. The answers are the
+release's own calibrated probabilities. A choice option is sent as its
+description, or as its label when it has none. A noul's instructions
+work best as a statement ("The message is urgent."). It reads the first
+127 tokens of the state, and `truncated` reports the rest. A question
+may have at most 32 options and 192 tokens. It is English only. The
+release's span questions and corrections are not exposed, since the
+request has no type for them. `golden/tinydecide` holds the release's
+conformance suite (`bench/tinydecide_golden.py`).
+
+On lev's benches (`bench/README.md`) it scores 87.5% on AG News in 11
+ms, but 41.7% on authored144 (chance is 33%), 52.5% on BoolQ and 0.302
+on typed-decisions. The `english` encoder scores 61.1%, 72.5% and 0.362.
+It fits where size and latency matter more than accuracy, such as a
+pre-filter or topic routing of short messages.
 
 ## Context: what the model sees
 

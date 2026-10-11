@@ -29,6 +29,7 @@
             [clojure.string :as str]
             [lev.agent :as ag]
             [lev.clef :as clef]
+            [lev.tinydecide :as td]
             [lev.llm :as llm]
             [lev.sequence :as seq]))
 
@@ -122,11 +123,14 @@
   ({:decide :count-tokens}) the model is whatever those fns are (tests),
   else the GGUF is loaded through lev.llm. :engine \"clef\" makes a Clef
   agent instead (lev.clef: the GGUF is its backbone, :head its release
-  directory), which the router then serves like any thinker."
+  directory), and :engine \"tinydecide\" a TinyDecide one (lev.tinydecide:
+  :model is its release directory), which the router then serves like
+  any thinker."
   ([cfg] (thinker cfg nil))
   ([cfg backing]
-   (if (= "clef" (some-> (:engine cfg) name))
-     (clef/clef (-> (dissoc cfg :engine) (update :calibration calibration-map)))
+   (case (some-> (:engine cfg) name)
+     "clef" (clef/clef (-> (dissoc cfg :engine) (update :calibration calibration-map)))
+     "tinydecide" (td/tinydecide (-> (dissoc cfg :engine) (update :calibration calibration-map)))
      (thinker* cfg backing))))
 
 (defn- key-str [k] (if (keyword? k) (name k) (str k)))
