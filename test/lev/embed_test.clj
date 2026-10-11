@@ -25,7 +25,9 @@
   (let [batch (ag/embed @tu/agent [oom {"service" "payments" "signal" "OOM"} refund])
         alone (mapv #(first (ag/embed @tu/agent [%])) [oom {"service" "payments" "signal" "OOM"} refund])]
     (is (tu/approx= 1e-4 alone batch))
-    (is (= (first batch) (first (ag/embed @tu/agent [oom]))) "deterministic")))
+    ;; bit-for-bit only for the same call: a different batch size changes
+    ;; BLAS's summation order (OpenBLAS on linux)
+    (is (= (ag/embed @tu/agent [oom refund]) (ag/embed @tu/agent [oom refund])) "deterministic")))
 
 (deftest similar-states-are-closer
   (let [[a b c] (ag/embed @tu/agent [oom leak refund])]
